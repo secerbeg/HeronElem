@@ -6,11 +6,12 @@ import com.secerbeg.matches.events.EventObserver;
 /**
  * When the 'back to menu' was pressed.
  */
-public class FlipDownCardsEvent extends AbstractEvent {
-
+public class FlipDownCardsEvent extends AbstractEvent
+{
 	public static final String TYPE = FlipDownCardsEvent.class.getName();
 
-	public FlipDownCardsEvent() {
+	public FlipDownCardsEvent()
+	{
 	}
 	
 	@Override

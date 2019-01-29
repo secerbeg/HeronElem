@@ -30,7 +30,8 @@ import java.util.Map;
 
 public class BoardView extends LinearLayout {
 
-	private LayoutParams mRowLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+	private LayoutParams mRowLayoutParams =
+			new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 	private LayoutParams mTileLayoutParams;
 	private int mScreenWidth;
 	private int mScreenHeight;
@@ -45,7 +46,8 @@ public class BoardView extends LinearLayout {
 		this(context, null);
 	}
 
-	public BoardView(Context context, AttributeSet attributeSet) {
+	public BoardView(Context context, AttributeSet attributeSet)
+	{
 		super(context, attributeSet);
 		setOrientation(LinearLayout.VERTICAL);
 		setGravity(Gravity.CENTER);

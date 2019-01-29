@@ -10,6 +10,12 @@ public class Memory
     private static String highStartKey = "theme_%d_difficulty_%d";
     private static String bestTimeKey = "themetime_%d_difficultytime_%d";
 
+    /**
+     *
+     * @param theme
+     * @param difficulty
+     * @param stars
+     */
     public static void save(int theme, int difficulty, int stars)
     {
         int highStars =
@@ -27,6 +33,13 @@ public class Memory
         }
     }
 
+    /**
+     *
+     *
+     * @param theme
+     * @param difficulty
+     * @param passedSecs
+     */
     public static void saveTime(int theme, int difficulty, int passedSecs)
     {
         int bestTime = getBestTime(theme, difficulty);
@@ -45,6 +58,12 @@ public class Memory
         }
     }
 
+    /**
+     *
+     * @param theme
+     * @param difficulty
+     * @return
+     */
     public static int getHighStars(int theme, int difficulty) {
 
         SharedPreferences sharedPreferences =
@@ -55,6 +74,12 @@ public class Memory
         return sharedPreferences.getInt(key, 0);
     }
 
+    /**
+     *
+     * @param theme
+     * @param difficulty
+     * @return
+     */
     public static int getBestTime(int theme, int difficulty)
     {
 
