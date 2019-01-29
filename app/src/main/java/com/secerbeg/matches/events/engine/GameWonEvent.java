@@ -6,6 +6,8 @@ import com.secerbeg.matches.model.GameState;
 
 /**
  * When the 'back to menu' was pressed.
+ *
+ * @author Mirza Secerbegovic
  */
 public class GameWonEvent extends AbstractEvent {
 

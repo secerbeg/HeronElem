@@ -17,58 +17,75 @@ import android.widget.RelativeLayout;
 
 import com.secerbeg.matches.R;
 
-public class TileView extends FrameLayout {
+public class TileView extends FrameLayout
+{
 
 	private RelativeLayout mTopImage;
 	private ImageView mTileImage;
 	private boolean mFlippedDown = true;
 
-	public TileView(Context context) {
+	public TileView(Context context)
+	{
 		this(context, null);
 	}
 
-	public TileView(Context context, AttributeSet attrs) {
+	public TileView(Context context, AttributeSet attrs)
+	{
 		super(context, attrs);
 	}
 
-	public static TileView fromXml(Context context, ViewGroup parent) {
-		return (TileView) LayoutInflater.from(context).inflate(R.layout.tile_view, parent, false);
+	public static TileView fromXml(Context context, ViewGroup parent)
+	{
+		return (TileView) LayoutInflater.from(context).inflate(
+				R.layout.tile_view,
+				parent,
+				false);
 	}
 
 	@Override
-	protected void onFinishInflate() {
+	protected void onFinishInflate()
+	{
 		super.onFinishInflate();
-		mTopImage = (RelativeLayout) findViewById(R.id.image_top);
-		mTileImage = (ImageView) findViewById(R.id.image);
+		mTopImage =
+				(RelativeLayout) findViewById(R.id.image_top);
+		mTileImage =
+				(ImageView) findViewById(R.id.image);
 	}
 
-	public void setTileImage(Bitmap bitmap) {
+	public void setTileImage(Bitmap bitmap)
+	{
 		mTileImage.setImageBitmap(bitmap);
 	}
 
-	public void flipUp() {
+	public void flipUp()
+	{
 		mFlippedDown = false;
 		flip();
 	}
 
-	public void flipDown() {
+	public void flipDown()
+	{
 		mFlippedDown = true;
 		flip();
 	}
 	
-	private void flip() {
+	private void flip()
+	{
 		FlipAnimation flipAnimation = new FlipAnimation(mTopImage, mTileImage);
-		if (mTopImage.getVisibility() == View.GONE) {
+		if (mTopImage.getVisibility() == View.GONE)
+		{
 			flipAnimation.reverse();
 		}
 		startAnimation(flipAnimation);
 	}
 
-	public boolean isFlippedDown() {
+	public boolean isFlippedDown()
+	{
 		return mFlippedDown;
 	}
 
-	public class FlipAnimation extends Animation {
+	public class FlipAnimation extends Animation
+	{
 		private Camera camera;
 
 		private View fromView;
@@ -87,7 +104,8 @@ public class TileView extends FrameLayout {
 		 * @param toView
 		 *            Second view in the transition.
 		 */
-		public FlipAnimation(View fromView, View toView) {
+		public FlipAnimation(View fromView, View toView)
+		{
 			this.fromView = fromView;
 			this.toView = toView;
 
@@ -104,7 +122,8 @@ public class TileView extends FrameLayout {
 		}
 
 		@Override
-		public void initialize(int width, int height, int parentWidth, int parentHeight) {
+		public void initialize(int width, int height, int parentWidth, int parentHeight)
+		{
 			super.initialize(width, height, parentWidth, parentHeight);
 			centerX = width / 2;
 			centerY = height / 2;
@@ -112,7 +131,8 @@ public class TileView extends FrameLayout {
 		}
 
 		@Override
-		protected void applyTransformation(float interpolatedTime, Transformation t) {
+		protected void applyTransformation(float interpolatedTime, Transformation t)
+		{
 			// Angle around the y-axis of the rotation at the given time
 			// calculated both in radians and degrees.
 			final double radians = Math.PI * interpolatedTime;

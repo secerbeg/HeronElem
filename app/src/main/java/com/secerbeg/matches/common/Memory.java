@@ -3,6 +3,10 @@ package com.secerbeg.matches.common;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ *
+ * @author Mirza Secerbegovic
+ */
 public class Memory
 {
 
@@ -10,6 +14,12 @@ public class Memory
     private static String highStartKey = "theme_%d_difficulty_%d";
     private static String bestTimeKey = "themetime_%d_difficultytime_%d";
 
+    /**
+     *
+     * @param theme
+     * @param difficulty
+     * @param stars
+     */
     public static void save(int theme, int difficulty, int stars)
     {
         int highStars =
@@ -57,7 +67,6 @@ public class Memory
 
     public static int getBestTime(int theme, int difficulty)
     {
-
         SharedPreferences sharedPreferences =
                 Shared.context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         String key =

@@ -28,7 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BoardView extends LinearLayout {
+public class BoardView extends LinearLayout
+{
 
 	private LayoutParams mRowLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 	private LayoutParams mTileLayoutParams;
@@ -58,11 +59,13 @@ public class BoardView extends LinearLayout {
 	}
 
 	@Override
-	protected void onFinishInflate() {
+	protected void onFinishInflate()
+	{
 		super.onFinishInflate();
 	}
 
-	public static BoardView fromXml(Context context, ViewGroup parent) {
+	public static BoardView fromXml(Context context, ViewGroup parent)
+	{
 		return (BoardView) LayoutInflater.from(context).inflate(R.layout.board_view, parent, false);
 	}
 

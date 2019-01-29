@@ -5,6 +5,8 @@ import com.secerbeg.matches.events.EventObserver;
 
 /**
  * When the 'back to menu' was pressed.
+ *
+ * @author Mirza Secerbegovic
  */
 public class FlipDownCardsEvent extends AbstractEvent {
 

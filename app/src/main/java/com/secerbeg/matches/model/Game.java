@@ -7,8 +7,8 @@ import com.secerbeg.matches.themes.Theme;
  * 
  * @author sromku
  */
-public class Game {
-
+public class Game
+{
 	/**
 	 * The board configuration
 	 */
