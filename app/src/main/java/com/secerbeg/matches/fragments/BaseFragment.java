@@ -46,27 +46,28 @@ public class BaseFragment extends Fragment implements EventObserver
 	{
 		throw new UnsupportedOperationException();
 	}
-
 	@Override
 	public void onEvent(ThemeSelectedEvent event)
+
 	{
 		throw new UnsupportedOperationException();
 	}
-
 	@Override
 	public void onEvent(GameWonEvent event)
+
 	{
 		throw new UnsupportedOperationException();
 	}
-
 	@Override
 	public void onEvent(BackGameEvent event)
+
 	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void onEvent(NextGameEvent event)
+
 	{
 		throw new UnsupportedOperationException();
 	}
