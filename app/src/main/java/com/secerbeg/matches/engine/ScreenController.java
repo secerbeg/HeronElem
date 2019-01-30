@@ -74,9 +74,11 @@ public class ScreenController
 	{
 		mFragmentManager = Shared.activity.getSupportFragmentManager();
 		
-		if (screen == Screen.GAME && openedScreens.get(openedScreens.size() - 1) == Screen.GAME) {
+		if (screen == Screen.GAME && openedScreens.get(openedScreens.size() - 1) == Screen.GAME)
+		{
 			openedScreens.remove(openedScreens.size() - 1);
-		} else if (screen == Screen.DIFFICULTY && openedScreens.get(openedScreens.size() - 1) == Screen.GAME) {
+		} else if (screen == Screen.DIFFICULTY && openedScreens.get(openedScreens.size() - 1) == Screen.GAME)
+		{
 			openedScreens.remove(openedScreens.size() - 1);
 			openedScreens.remove(openedScreens.size() - 1);
 		}
@@ -93,17 +95,20 @@ public class ScreenController
 	 */
 	public boolean onBack()
 	{
-		if (openedScreens.size() > 0) {
+		if (openedScreens.size() > 0)
+		{
 			Screen screenToRemove = openedScreens.get(openedScreens.size() - 1);
 			openedScreens.remove(openedScreens.size() - 1);
-			if (openedScreens.size() == 0) {
+			if (openedScreens.size() == 0)
+			{
 				return true;
 			}
 			Screen screen = openedScreens.get(openedScreens.size() - 1);
 			openedScreens.remove(openedScreens.size() - 1);
 			openScreen(screen);
 			if ((screen == Screen.THEME_SELECT || screen == Screen.MENU) && 
-					(screenToRemove == Screen.DIFFICULTY || screenToRemove == Screen.GAME)) {
+					(screenToRemove == Screen.DIFFICULTY || screenToRemove == Screen.GAME))
+			{
 				Shared.eventBus.notify(new ResetBackgroundEvent());
 			}
 			return false;

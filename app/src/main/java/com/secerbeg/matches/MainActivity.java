@@ -1,6 +1,5 @@
 package com.secerbeg.matches;
 
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -17,9 +16,12 @@ import com.secerbeg.matches.utils.Utils;
 
 public class MainActivity extends FragmentActivity
 {
-
 	private ImageView mBackgroundImage;
 
+	/**
+	 *
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -41,8 +43,6 @@ public class MainActivity extends FragmentActivity
 
 		// set menu
 		ScreenController.getInstance().openScreen(Screen.MENU);
-
-
 	}
 
 	/**

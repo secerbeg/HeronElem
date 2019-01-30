@@ -17,12 +17,14 @@ public class FlipDownCardsEvent extends AbstractEvent
 	}
 	
 	@Override
-	protected void fire(EventObserver eventObserver) {
+	protected void fire(EventObserver eventObserver)
+	{
 		eventObserver.onEvent(this);
 	}
 
 	@Override
-	public String getType() {
+	public String getType()
+	{
 		return TYPE;
 	}
 
