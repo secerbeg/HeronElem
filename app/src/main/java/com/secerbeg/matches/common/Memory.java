@@ -30,7 +30,7 @@ public class Memory
             SharedPreferences sharedPreferences =
                     Shared.context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor edit =  sharedPreferences.edit();
-            String key =  String.format(highStartKey, theme, difficulty);
+            String key = String.format(highStartKey, theme, difficulty);
             edit.putInt(key, stars).commit();
         }
     }

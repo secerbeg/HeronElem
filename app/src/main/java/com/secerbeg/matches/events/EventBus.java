@@ -33,27 +33,35 @@ public class EventBus
 		return mInstance;
 	}
 
-	synchronized public void listen(String eventType, EventObserver eventObserver) {
+	synchronized public void listen(String eventType, EventObserver eventObserver)
+	{
 		List<EventObserver> observers = events.get(eventType);
-		if (observers == null) {
+		if (observers == null)
+		{
 			observers = Collections.synchronizedList(new ArrayList<EventObserver>());
 		}
 		observers.add(eventObserver);
 		events.put(eventType, observers);
 	}
 
-	synchronized public void unlisten(String eventType, EventObserver eventObserver) {
+	synchronized public void unlisten(String eventType, EventObserver eventObserver)
+	{
 		List<EventObserver> observers = events.get(eventType);
-		if (observers != null) {
+		if (observers != null)
+		{
 			observers.remove(eventObserver);
 		}
 	}
 
-	public void notify(Event event) {
-		synchronized (obj) {
+	public void notify(Event event)
+	{
+		synchronized (obj)
+		{
 			List<EventObserver> observers = events.get(event.getType());
-			if (observers != null) {
-				for (EventObserver observer : observers) {
+			if (observers != null)
+			{
+				for (EventObserver observer : observers)
+				{
 					AbstractEvent abstractEvent = (AbstractEvent) event;
 					abstractEvent.fire(observer);
 				}
@@ -61,10 +69,13 @@ public class EventBus
 		}
 	}
 	
-	public void notify(final Event event, long delay) {
-		mHandler.postDelayed(new Runnable() {
+	public void notify(final Event event, long delay)
+	{
+		mHandler.postDelayed(new Runnable()
+		{
 			@Override
-			public void run() {
+			public void run()
+			{
 				EventBus.this.notify(event);
 			}
 		}, delay);

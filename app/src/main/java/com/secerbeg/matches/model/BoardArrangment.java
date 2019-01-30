@@ -13,11 +13,12 @@ import java.util.Map;
  * 
  * @author sromku
  */
-public class BoardArrangment {
+public class BoardArrangment
+{
 
 	// like {0-2, 4-3, 1-5}
 	public Map<Integer, Integer> pairs;
-	// like {0-mosters_20, 1-mosters_12, 2-mosters_20, ...}
+	// like {0-monsters_20, 1-monsters_12, 2-monsters_20, ...}
 	public Map<Integer, String> tileUrls;
 
 	/**
@@ -45,9 +46,17 @@ public class BoardArrangment {
 		return null;
 	}
 
-	public boolean isPair(int id1, int id2) {
+	/**
+	 *
+	 * @param id1
+	 * @param id2
+	 * @return
+	 */
+	public boolean isPair(int id1, int id2)
+	{
 		Integer integer = pairs.get(id1);
-		if (integer == null) {
+		if (integer == null)
+		{
 			// TODO Report this bug!!!
 			return false;
 		}

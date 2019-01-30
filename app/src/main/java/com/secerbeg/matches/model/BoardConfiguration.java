@@ -19,7 +19,8 @@ public class BoardConfiguration
 	public BoardConfiguration(int difficulty)
 	{
 		this.difficulty = difficulty;
-		switch (difficulty) {
+		switch (difficulty)
+		{
 		case 1:
 			numTiles = _6;
 			numTilesInRow = 3;

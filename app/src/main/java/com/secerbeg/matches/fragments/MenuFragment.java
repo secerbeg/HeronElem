@@ -23,7 +23,8 @@ import com.secerbeg.matches.events.ui.StartEvent;
 import com.secerbeg.matches.ui.PopupManager;
 import com.secerbeg.matches.utils.Utils;
 
-public class MenuFragment extends Fragment {
+public class MenuFragment extends Fragment
+{
 
 	private ImageView mTitle;
 	private ImageView mStartGameButton;
@@ -33,16 +34,21 @@ public class MenuFragment extends Fragment {
 	private ImageView mGooglePlayGameButton;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	public View onCreateView(
+			LayoutInflater inflater,
+			ViewGroup container,
+			Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.menu_fragment, container, false);
 		mTitle = (ImageView) view.findViewById(R.id.title);
 		mStartGameButton = (ImageView) view.findViewById(R.id.start_game_button);
 		mSettingsGameButton = (ImageView) view.findViewById(R.id.settings_game_button);
 		mSettingsGameButton.setSoundEffectsEnabled(false);
-		mSettingsGameButton.setOnClickListener(new View.OnClickListener() {
+		mSettingsGameButton.setOnClickListener(new View.OnClickListener()
+		{
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				PopupManager.showPopupSettings();
 			}
 		});
@@ -51,7 +57,9 @@ public class MenuFragment extends Fragment {
 		{
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity(), "Leaderboards will be available in the next game updates", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(),
+						"Leaderboards will be available in the next game updates",
+						Toast.LENGTH_LONG).show();
 			}
 		});
 		mStartButtonLights = (ImageView) view.findViewById(R.id.start_game_button_lights);
@@ -79,7 +87,8 @@ public class MenuFragment extends Fragment {
 		return view;
 	}
 
-	protected void animateAllAssetsOff(AnimatorListenerAdapter adapter) {
+	protected void animateAllAssetsOff(AnimatorListenerAdapter adapter)
+	{
 		// title
 		// 120dp + 50dp + buffer(30dp)
 		ObjectAnimator titleAnimator = ObjectAnimator.ofFloat(mTitle, "translationY", Utils.px(-200));
@@ -115,7 +124,8 @@ public class MenuFragment extends Fragment {
 		animatorSet.start();
 	}
 
-	private void startTootipAnimation() {
+	private void startTootipAnimation()
+	{
 		ObjectAnimator scaleY = ObjectAnimator.ofFloat(mTooltip, "scaleY", 0.8f);
 		scaleY.setDuration(200);
 		ObjectAnimator scaleYBack = ObjectAnimator.ofFloat(mTooltip, "scaleY", 1f);
@@ -135,7 +145,8 @@ public class MenuFragment extends Fragment {
 		animatorSet.start();
 	}
 
-	private void startLightsAnimation() {
+	private void startLightsAnimation()
+	{
 		ObjectAnimator animator = ObjectAnimator.ofFloat(mStartButtonLights, "rotation", 0f, 360f);
 		animator.setInterpolator(new AccelerateDecelerateInterpolator());
 		animator.setDuration(6000);

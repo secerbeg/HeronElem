@@ -22,7 +22,8 @@ import com.secerbeg.matches.utils.Clock.OnTimerCount;
 import com.secerbeg.matches.utils.FontLoader;
 import com.secerbeg.matches.utils.FontLoader.Font;
 
-public class GameFragment extends BaseFragment {
+public class GameFragment extends BaseFragment
+{
 
 	private BoardView mBoardView;
 	private TextView mTime;
@@ -30,7 +31,8 @@ public class GameFragment extends BaseFragment {
 	private LinearLayout ads;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	{
 		ViewGroup view = (ViewGroup) inflater.inflate(R.layout.game_fragment, container, false);
 		view.setClipChildren(false);
 		((ViewGroup)view.findViewById(R.id.game_board)).setClipChildren(false);
@@ -52,14 +54,16 @@ public class GameFragment extends BaseFragment {
 	}
 	
 	@Override
-	public void onDestroy() {
+	public void onDestroy()
+	{
 		Shared.eventBus.unlisten(FlipDownCardsEvent.TYPE, this);
 		Shared.eventBus.unlisten(HidePairCardsEvent.TYPE, this);
 		Shared.eventBus.unlisten(GameWonEvent.TYPE, this);
 		super.onDestroy();
 	}
 
-	private void buildBoard() {
+	private void buildBoard()
+	{
 		Game game = Shared.engine.getActiveGame();
 		int time = game.boardConfiguration.time;
 		setTime(time);
@@ -68,15 +72,18 @@ public class GameFragment extends BaseFragment {
 		startClock(time);
 	}
 	
-	private void setTime(int time) {
+	private void setTime(int time)
+	{
 		int min = time / 60;
 		int sec = time - min*60;
 		mTime.setText(" " + String.format("%02d", min) + ":" + String.format("%02d", sec));
 	}
 
-	private void startClock(int sec) {
+	private void startClock(int sec)
+	{
 		Clock clock = Clock.getInstance();
-		clock.startTimer(sec*1000, 1000, new OnTimerCount() {
+		clock.startTimer(sec*1000, 1000, new OnTimerCount()
+		{
 			
 			@Override
 			public void onTick(long millisUntilFinished) {
@@ -91,7 +98,8 @@ public class GameFragment extends BaseFragment {
 	}
 
 	@Override
-	public void onEvent(GameWonEvent event) {
+	public void onEvent(GameWonEvent event)
+	{
 		mTime.setVisibility(View.GONE);
 		mTimeImage.setVisibility(View.GONE);
 		PopupManager.showPopupWon(event.gameState);

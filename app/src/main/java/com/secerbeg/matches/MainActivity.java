@@ -74,6 +74,9 @@ public class MainActivity extends FragmentActivity
 		}
 	}
 
+	/**
+	 *
+	 */
 	private void setBackgroundImage()
 	{
 		Bitmap bitmap =

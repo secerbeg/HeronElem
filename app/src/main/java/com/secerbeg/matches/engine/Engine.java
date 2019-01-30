@@ -107,12 +107,11 @@ public class Engine extends EventObserverAdapter
 		if (drawable != null)
 		{
 			((TransitionDrawable) drawable).reverseTransition(2000);
-		} else
-			{
-
+		}
+		else
+		{
 			new AsyncTask<Void, Void, Bitmap>()
 			{
-
 				@Override
 				protected Bitmap doInBackground(Void... params)
 				{
@@ -135,7 +134,8 @@ public class Engine extends EventObserverAdapter
 	}
 
 	@Override
-	public void onEvent(NextGameEvent event) {
+	public void onEvent(NextGameEvent event)
+	{
 		PopupManager.closePopup();
 		int difficulty = mPlayingGame.boardConfiguration.difficulty;
 		if (mPlayingGame.gameState.achievedStars == 3 && difficulty < 6)
@@ -146,19 +146,22 @@ public class Engine extends EventObserverAdapter
 	}
 
 	@Override
-	public void onEvent(BackGameEvent event) {
+	public void onEvent(BackGameEvent event)
+	{
 		PopupManager.closePopup();
 		mScreenController.openScreen(Screen.DIFFICULTY);
 	}
 
 	@Override
-	public void onEvent(ThemeSelectedEvent event) {
+	public void onEvent(ThemeSelectedEvent event)
+	{
 		mSelectedTheme = event.theme;
 		mScreenController.openScreen(Screen.DIFFICULTY);
 		AsyncTask<Void, Void, TransitionDrawable> task = new AsyncTask<Void, Void, TransitionDrawable>() {
 
 			@Override
-			protected TransitionDrawable doInBackground(Void... params) {
+			protected TransitionDrawable doInBackground(Void... params)
+			{
 				Bitmap bitmap = Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
 				Bitmap backgroundImage = Themes.getBackgroundImage(mSelectedTheme);
 				backgroundImage = Utils.crop(backgroundImage, Utils.screenHeight(), Utils.screenWidth());
@@ -170,7 +173,8 @@ public class Engine extends EventObserverAdapter
 			}
 
 			@Override
-			protected void onPostExecute(TransitionDrawable result) {
+			protected void onPostExecute(TransitionDrawable result)
+			{
 				super.onPostExecute(result);
 				mBackgroundImage.setImageDrawable(result);
 				result.startTransition(2000);
@@ -180,7 +184,8 @@ public class Engine extends EventObserverAdapter
 	}
 
 	@Override
-	public void onEvent(DifficultySelectedEvent event) {
+	public void onEvent(DifficultySelectedEvent event)
+	{
 		mFlippedId = -1;
 		mPlayingGame = new Game();
 		mPlayingGame.boardConfiguration = new BoardConfiguration(event.difficulty);
@@ -194,14 +199,16 @@ public class Engine extends EventObserverAdapter
 		mScreenController.openScreen(Screen.GAME);
 	}
 
-	private void arrangeBoard() {
+	private void arrangeBoard()
+	{
 		BoardConfiguration boardConfiguration = mPlayingGame.boardConfiguration;
 		BoardArrangment boardArrangment = new BoardArrangment();
 
 		// build pairs
 		// result {0,1,2,...n} // n-number of tiles
 		List<Integer> ids = new ArrayList<Integer>();
-		for (int i = 0; i < boardConfiguration.numTiles; i++) {
+		for (int i = 0; i < boardConfiguration.numTiles; i++)
+		{
 			ids.add(i);
 		}
 		// shuffle
@@ -214,8 +221,10 @@ public class Engine extends EventObserverAdapter
 		boardArrangment.pairs = new HashMap<Integer, Integer>();
 		boardArrangment.tileUrls = new HashMap<Integer, String>();
 		int j = 0;
-		for (int i = 0; i < ids.size(); i++) {
-			if (i + 1 < ids.size()) {
+		for (int i = 0; i < ids.size(); i++)
+		{
+			if (i + 1 < ids.size())
+			{
 				// {4,10}, {2,39}, ...
 				boardArrangment.pairs.put(ids.get(i), ids.get(i + 1));
 				// {10,4}, {39,2}, ...

@@ -106,7 +106,7 @@ public class ThemeSelectFragment extends Fragment
 		View words =
 				view.findViewById(R.id.theme_words_container);
 
-		final Theme themeWords= Themes.createWordsTheme();
+		final Theme themeWords = Themes.createWordsTheme();
 
 		setStars((ImageView) words.findViewById(R.id.theme_words), themeWords, "words");
 		words.setOnClickListener(

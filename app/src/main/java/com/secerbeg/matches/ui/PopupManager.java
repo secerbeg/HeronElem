@@ -16,9 +16,11 @@ import com.secerbeg.matches.R;
 import com.secerbeg.matches.common.Shared;
 import com.secerbeg.matches.model.GameState;
 
-public class PopupManager {
+public class PopupManager
+{
 	
-	public static void showPopupSettings() {
+	public static void showPopupSettings()
+	{
 		RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		popupContainer.removeAllViews();
 
@@ -48,7 +50,8 @@ public class PopupManager {
 		animatorSet.start();
 	}
 
-	public static void showPopupWon(GameState gameState) {
+	public static void showPopupWon(GameState gameState)
+	{
 		RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		popupContainer.removeAllViews();
 
@@ -72,15 +75,20 @@ public class PopupManager {
 		animatorSet.start();
 	}
 
-	public static void closePopup() {
+	public static void closePopup()
+	{
 		final RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		int childCount = popupContainer.getChildCount();
-		if (childCount > 0) {
+		if (childCount > 0)
+		{
 			View background = null;
 			View viewPopup = null;
-			if (childCount == 1) {
+			if (childCount == 1)
+			{
 				viewPopup = popupContainer.getChildAt(0);
-			} else {
+			}
+			else
+			{
 				background = popupContainer.getChildAt(0);
 				viewPopup = popupContainer.getChildAt(1);
 			}
@@ -88,10 +96,13 @@ public class PopupManager {
 			AnimatorSet animatorSet = new AnimatorSet();
 			ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(viewPopup, "scaleX", 0f);
 			ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(viewPopup, "scaleY", 0f);
-			if (childCount > 1) {
+			if (childCount > 1)
+			{
 				ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(background, "alpha", 0f);
 				animatorSet.playTogether(scaleXAnimator, scaleYAnimator, alphaAnimator);
-			} else {
+			}
+			else
+			{
 				animatorSet.playTogether(scaleXAnimator, scaleYAnimator);
 			}
 			animatorSet.setDuration(300);
@@ -106,8 +117,10 @@ public class PopupManager {
 		}
 	}
 
-	public static boolean isShown() {
-		RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
+	public static boolean isShown()
+	{
+		RelativeLayout popupContainer =
+				(RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		return popupContainer.getChildCount() > 0;
 	}
 }

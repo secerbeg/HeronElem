@@ -1,5 +1,8 @@
 package com.secerbeg.matches.model;
 
+/**
+ *
+ */
 public class GameState
 {
 	public int remainedSeconds;
