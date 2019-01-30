@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -47,15 +48,14 @@
         android:scaleType="centerCrop"
         android:src="@drawable/button_google_play" />
 
-	<ImageView
+    <ImageView
         android:id="@+id/title"
         android:layout_width="@dimen/title_width"
         android:layout_height="@dimen/title_height"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/title_margin_top"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/title" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/title_onheron" />
 	
 	<ImageView
         android:id="@+id/tooltip"
@@ -68,4 +68,5 @@
         android:src="@drawable/tooltip_play"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/tooltip_margin_bottom"/>
+
 </RelativeLayout>

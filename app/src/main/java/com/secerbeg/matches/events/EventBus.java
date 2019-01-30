@@ -12,9 +12,10 @@ import java.util.Map;
  * The gateway of all events running in the game from ui to engine components
  * and back.
  * 
- * @author sromku
+ * @author Mirza Secerbegovic
  */
-public class EventBus {
+public class EventBus
+{
 
 	private Handler mHandler;
 	private static EventBus mInstance = null;

@@ -19,20 +19,43 @@ import com.secerbeg.matches.themes.Themes;
 
 import java.util.Locale;
 
-public class ThemeSelectFragment extends Fragment {
-
+public class ThemeSelectFragment extends Fragment
+{
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = LayoutInflater.from(Shared.context).inflate(R.layout.theme_select_fragment, container, false);
-		View animals = view.findViewById(R.id.theme_animals_container);
-		View monsters = view.findViewById(R.id.theme_monsters_container);
-		View emoji = view.findViewById(R.id.theme_emoji_container);
+	public View onCreateView(
+			LayoutInflater inflater,
+			ViewGroup container,
+			Bundle savedInstanceState)
+	{
+		View view =
+				LayoutInflater.from(Shared.context).inflate(R.layout.theme_select_fragment,
+						container,
+						false);
+
+		View animals =
+				view.findViewById(R.id.theme_animals_container);
+		View monsters =
+				view.findViewById(R.id.theme_monsters_container);
+		View emoji =
+				view.findViewById(R.id.theme_emoji_container);
+
+		View words =
+				view.findViewById(R.id.theme_emoji_container);
 
 		final Theme themeAnimals = Themes.createAnimalsTheme();
-		setStars((ImageView) animals.findViewById(R.id.theme_animals), themeAnimals, "animals");
-		final Theme themeMonsters = Themes.createMosterTheme();
+
+		setStars(
+				(ImageView) animals.findViewById(R.id.theme_animals),
+				themeAnimals,
+				"animals");
+
+		final Theme themeMonsters =
+				Themes.createMosterTheme();
+
 		setStars((ImageView) monsters.findViewById(R.id.theme_monsters), themeMonsters, "monsters");
-		final Theme themeEmoji = Themes.createEmojiTheme();
+
+		final Theme themeEmoji =
+				Themes.createEmojiTheme();
 		setStars((ImageView) emoji.findViewById(R.id.theme_emoji), themeEmoji, "emoji");
 
 		animals.setOnClickListener(new View.OnClickListener() {

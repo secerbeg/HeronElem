@@ -20,11 +20,18 @@ import com.secerbeg.matches.events.ui.DifficultySelectedEvent;
 import com.secerbeg.matches.themes.Theme;
 import com.secerbeg.matches.ui.DifficultyView;
 
-public class DifficultySelectFragment extends Fragment {
+public class DifficultySelectFragment extends Fragment
+{
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = LayoutInflater.from(Shared.context).inflate(R.layout.difficulty_select_fragment, container, false);
+    public View onCreateView(
+            LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState)
+    {
+        View view =
+                LayoutInflater.from(Shared.context).inflate(
+                        R.layout.difficulty_select_fragment, container, false);
         Theme theme = Shared.engine.getSelectedTheme();
 
         DifficultyView difficulty1 = (DifficultyView) view.findViewById(R.id.select_difficulty_1);
@@ -90,25 +97,32 @@ public class DifficultySelectFragment extends Fragment {
 
     }
 
-    private String getBestTimeForStage(int theme, int difficulty) {
+    private String getBestTimeForStage(int theme, int difficulty)
+    {
         int bestTime = Memory.getBestTime(theme, difficulty);
-        if (bestTime != -1) {
+        if (bestTime != -1)
+        {
             int minutes = (bestTime % 3600) / 60;
             int seconds = (bestTime) % 60;
             String result = String.format("BEST : %02d:%02d", minutes, seconds);
             return result;
-        } else {
+        } else
+            {
             String result = "BEST : -";
             return result;
         }
     }
 
-    private void animate(View... view) {
+    private void animate(View... view)
+    {
         AnimatorSet animatorSet = new AnimatorSet();
         Builder builder = animatorSet.play(new AnimatorSet());
-        for (int i = 0; i < view.length; i++) {
-            ObjectAnimator scaleX = ObjectAnimator.ofFloat(view[i], "scaleX", 0.8f, 1f);
-            ObjectAnimator scaleY = ObjectAnimator.ofFloat(view[i], "scaleY", 0.8f, 1f);
+        for (int i = 0; i < view.length; i++)
+        {
+            ObjectAnimator scaleX =
+                    ObjectAnimator.ofFloat(view[i], "scaleX", 0.8f, 1f);
+            ObjectAnimator scaleY =
+                    ObjectAnimator.ofFloat(view[i], "scaleY", 0.8f, 1f);
             builder.with(scaleX).with(scaleY);
         }
         animatorSet.setDuration(500);
@@ -116,10 +130,13 @@ public class DifficultySelectFragment extends Fragment {
         animatorSet.start();
     }
 
-    private void setOnClick(View view, final int difficulty) {
-        view.setOnClickListener(new View.OnClickListener() {
+    private void setOnClick(View view, final int difficulty)
+    {
+        view.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Shared.eventBus.notify(new DifficultySelectedEvent(difficulty));
             }
         });

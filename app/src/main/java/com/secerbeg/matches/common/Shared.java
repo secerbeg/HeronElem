@@ -6,6 +6,11 @@ import android.support.v4.app.FragmentActivity;
 import com.secerbeg.matches.engine.Engine;
 import com.secerbeg.matches.events.EventBus;
 
+
+/**
+ *
+ * @author Mirza Secerbegovic
+ */
 public class Shared
 {
 

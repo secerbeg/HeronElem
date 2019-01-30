@@ -5,6 +5,11 @@ import android.media.MediaPlayer.OnCompletionListener;
 
 import com.secerbeg.matches.R;
 
+
+/**
+ *
+ * @author Mirza Secerbegovic
+ */
 public class Music
 {
 	public static boolean OFF = false;

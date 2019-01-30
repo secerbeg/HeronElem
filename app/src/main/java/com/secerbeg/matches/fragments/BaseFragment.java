@@ -14,55 +14,66 @@ import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
 import com.secerbeg.matches.events.ui.ThemeSelectedEvent;
 
-public class BaseFragment extends Fragment implements EventObserver {
+public class BaseFragment extends Fragment implements EventObserver
+{
 
 	@Override
-	public void onEvent(FlipCardEvent event) {
+	public void onEvent(FlipCardEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(DifficultySelectedEvent event) {
+	public void onEvent(DifficultySelectedEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(HidePairCardsEvent event) {
+	public void onEvent(HidePairCardsEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(FlipDownCardsEvent event) {
+	public void onEvent(FlipDownCardsEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(StartEvent event) {
+	public void onEvent(StartEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(ThemeSelectedEvent event) {
+	public void onEvent(ThemeSelectedEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(GameWonEvent event) {
+	public void onEvent(GameWonEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(BackGameEvent event) {
+	public void onEvent(BackGameEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(NextGameEvent event) {
+	public void onEvent(NextGameEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void onEvent(ResetBackgroundEvent event) {
+	public void onEvent(ResetBackgroundEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 

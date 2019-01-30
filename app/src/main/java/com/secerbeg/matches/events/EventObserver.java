@@ -11,7 +11,10 @@ import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
 import com.secerbeg.matches.events.ui.ThemeSelectedEvent;
 
-
+/**
+ *
+ * @author Mirza Secerbegovic
+ */
 public interface EventObserver {
 
 	void onEvent(FlipCardEvent event);

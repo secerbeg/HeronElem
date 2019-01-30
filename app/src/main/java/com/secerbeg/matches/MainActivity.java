@@ -21,7 +21,8 @@ public class MainActivity extends FragmentActivity
 	private ImageView mBackgroundImage;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 
 		Shared.context = getApplicationContext();
@@ -44,28 +45,43 @@ public class MainActivity extends FragmentActivity
 
 	}
 
+	/**
+	 *
+	 */
 	@Override
-	protected void onDestroy() {
+	protected void onDestroy()
+	{
 		Shared.engine.stop();
 		super.onDestroy();
 	}
 
+	/**
+	 *
+	 */
 	@Override
-	public void onBackPressed() {
-		if (PopupManager.isShown()) {
+	public void onBackPressed()
+	{
+		if (PopupManager.isShown())
+		{
 			PopupManager.closePopup();
-			if (ScreenController.getLastScreen() == Screen.GAME) {
+			if (ScreenController.getLastScreen() == Screen.GAME)
+			{
 				Shared.eventBus.notify(new BackGameEvent());
 			}
-		} else if (ScreenController.getInstance().onBack()) {
+		} else if (ScreenController.getInstance().onBack())
+		{
 			super.onBackPressed();
 		}
 	}
 
-	private void setBackgroundImage() {
-		Bitmap bitmap = Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
-		bitmap = Utils.crop(bitmap, Utils.screenHeight(), Utils.screenWidth());
-		bitmap = Utils.downscaleBitmap(bitmap, 2);
+	private void setBackgroundImage()
+	{
+		Bitmap bitmap =
+				Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
+		bitmap =
+				Utils.crop(bitmap, Utils.screenHeight(), Utils.screenWidth());
+		bitmap =
+				Utils.downscaleBitmap(bitmap, 2);
 		mBackgroundImage.setImageBitmap(bitmap);
 	}
 

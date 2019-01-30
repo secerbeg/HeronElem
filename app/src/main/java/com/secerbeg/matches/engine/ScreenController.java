@@ -15,34 +15,63 @@ import com.secerbeg.matches.fragments.ThemeSelectFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScreenController {
+/**
+ *
+ * @author Mirza Secerbegovic
+ */
+public class ScreenController
+{
 
 	private static ScreenController mInstance = null;
 	private static List<Screen> openedScreens = new ArrayList<Screen>();
 	private FragmentManager mFragmentManager;
 
-	private ScreenController() {
+	/**
+	 *
+	 */
+	private ScreenController()
+	{
 	}
 
-	public static ScreenController getInstance() {
-		if (mInstance == null) {
+	/**
+	 *
+	 * @return
+	 */
+	public static ScreenController getInstance()
+	{
+		if (mInstance == null)
+		{
 			mInstance = new ScreenController();
 		}
 		return mInstance;
 	}
 
-	public static enum Screen {
+	/**
+	 *
+	 */
+	public static enum Screen
+	{
 		MENU,
 		GAME,
 		DIFFICULTY,
 		THEME_SELECT
 	}
-	
-	public static Screen getLastScreen() {
+
+	/**
+	 *
+	 * @return
+	 */
+	public static Screen getLastScreen()
+	{
 		return openedScreens.get(openedScreens.size() - 1);
 	}
 
-	public void openScreen(Screen screen) {
+	/**
+	 *
+	 * @param screen
+	 */
+	public void openScreen(Screen screen)
+	{
 		mFragmentManager = Shared.activity.getSupportFragmentManager();
 		
 		if (screen == Screen.GAME && openedScreens.get(openedScreens.size() - 1) == Screen.GAME) {
@@ -58,7 +87,12 @@ public class ScreenController {
 		openedScreens.add(screen);
 	}
 
-	public boolean onBack() {
+	/**
+	 *
+	 * @return
+	 */
+	public boolean onBack()
+	{
 		if (openedScreens.size() > 0) {
 			Screen screenToRemove = openedScreens.get(openedScreens.size() - 1);
 			openedScreens.remove(openedScreens.size() - 1);
@@ -77,8 +111,15 @@ public class ScreenController {
 		return true;
 	}
 
-	private Fragment getFragment(Screen screen) {
-		switch (screen) {
+	/**
+	 *
+	 * @param screen
+	 * @return
+	 */
+	private Fragment getFragment(Screen screen)
+	{
+		switch (screen)
+		{
 		case MENU:
 			return new MenuFragment();
 		case DIFFICULTY:

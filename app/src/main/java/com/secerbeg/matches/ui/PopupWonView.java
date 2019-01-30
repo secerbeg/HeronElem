@@ -67,24 +67,28 @@ public class PopupWonView extends RelativeLayout {
 		});
 	}
 
-	public void setGameState(final GameState gameState) {
+	public void setGameState(final GameState gameState)
+	{
 		int min = gameState.remainedSeconds / 60;
 		int sec = gameState.remainedSeconds - min * 60;
 		mTime.setText(" " + String.format("%02d", min) + ":" + String.format("%02d", sec));
 		mScore.setText("" + 0);
 		
-		mHandler.postDelayed(new Runnable() {
-
+		mHandler.postDelayed(new Runnable()
+		{
 			@Override
-			public void run() {
+			public void run()
+			{
 				animateScoreAndTime(gameState.remainedSeconds, gameState.achievedScore);
 				animateStars(gameState.achievedStars);
 			}
 		}, 500);
 	}
 
-	private void animateStars(int start) {
-		switch (start) {
+	private void animateStars(int start)
+	{
+		switch (start)
+		{
 		case 0:
 			mStar1.setVisibility(View.GONE);
 			mStar2.setVisibility(View.GONE);
@@ -121,7 +125,8 @@ public class PopupWonView extends RelativeLayout {
 		}
 	}
 	
-	private void animateStar(final View view, int delay) {
+	private void animateStar(final View view, int delay)
+	{
 		ObjectAnimator alpha = ObjectAnimator.ofFloat(view, "alpha", 0, 1f);
 		alpha.setDuration(100);
 		ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 0, 1f);
@@ -143,13 +148,16 @@ public class PopupWonView extends RelativeLayout {
 		}, delay);
 	}
 
-	private void animateScoreAndTime(final int remainedSeconds, final int achievedScore) {
+	private void animateScoreAndTime(final int remainedSeconds, final int achievedScore)
+	{
 		final int totalAnimation = 1200;
 
-		Clock.getInstance().startTimer(totalAnimation, 35, new OnTimerCount() {
+		Clock.getInstance().startTimer(totalAnimation, 35, new OnTimerCount()
+		{
 
 			@Override
-			public void onTick(long millisUntilFinished) {
+			public void onTick(long millisUntilFinished)
+			{
 				float factor = millisUntilFinished / (totalAnimation * 1f); // 0.1
 				int scoreToShow = achievedScore - (int) (achievedScore * factor);
 				int timeToShow = (int) (remainedSeconds * factor);
@@ -160,7 +168,8 @@ public class PopupWonView extends RelativeLayout {
 			}
 
 			@Override
-			public void onFinish() {
+			public void onFinish()
+			{
 				mTime.setText(" " + String.format("%02d", 0) + ":" + String.format("%02d", 0));
 				mScore.setText("" + achievedScore);
 			}
