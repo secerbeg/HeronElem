@@ -4,7 +4,8 @@ import com.secerbeg.matches.events.AbstractEvent;
 import com.secerbeg.matches.events.EventObserver;
 import com.secerbeg.matches.themes.Theme;
 
-public class ThemeSelectedEvent extends AbstractEvent {
+public class ThemeSelectedEvent extends AbstractEvent
+{
 
 	public static final String TYPE = ThemeSelectedEvent.class.getName();
 	public final Theme theme;

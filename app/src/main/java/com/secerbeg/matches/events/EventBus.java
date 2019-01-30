@@ -40,11 +40,13 @@ public class EventBus
 	synchronized public void listen(String eventType, EventObserver eventObserver)
 	{
 		List<EventObserver> observers = events.get(eventType);
+
 		if (observers == null)
 		{
 			observers = Collections.synchronizedList(new ArrayList<EventObserver>());
 		}
 		observers.add(eventObserver);
+
 		events.put(eventType, observers);
 	}
 

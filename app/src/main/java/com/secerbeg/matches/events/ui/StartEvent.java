@@ -6,7 +6,8 @@ import com.secerbeg.matches.events.EventObserver;
 /**
  * When the 'back to menu' was pressed.
  */
-public class StartEvent extends AbstractEvent {
+public class StartEvent extends AbstractEvent
+{
 
 	public static final String TYPE = StartEvent.class.getName();
 

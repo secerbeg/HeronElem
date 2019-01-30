@@ -129,7 +129,8 @@ public class Engine extends EventObserverAdapter
 	}
 
 	@Override
-	public void onEvent(StartEvent event) {
+	public void onEvent(StartEvent event)
+	{
 		mScreenController.openScreen(Screen.THEME_SELECT);
 	}
 
