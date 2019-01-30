@@ -8,21 +8,26 @@ import android.media.ThumbnailUtils;
 
 import com.secerbeg.matches.common.Shared;
 
-public class Utils {
+public class Utils
+{
 
-	public static int px(int dp) {
+	public static int px(int dp)
+	{
 		return (int) (Shared.context.getResources().getDisplayMetrics().density * dp);
 	}
 
-	public static int screenWidth() {
+	public static int screenWidth()
+	{
 		return Shared.context.getResources().getDisplayMetrics().widthPixels;
 	}
 
-	public static int screenHeight() {
+	public static int screenHeight()
+	{
 		return Shared.context.getResources().getDisplayMetrics().heightPixels;
 	}
 
-	public static Bitmap crop(Bitmap source, int newHeight, int newWidth) {
+	public static Bitmap crop(Bitmap source, int newHeight, int newWidth)
+	{
 		int sourceWidth = source.getWidth();
 		int sourceHeight = source.getHeight();
 
@@ -58,7 +63,8 @@ public class Utils {
 		return dest;
 	}
 
-	public static Bitmap scaleDown(int resource, int reqWidth, int reqHeight) {
+	public static Bitmap scaleDown(int resource, int reqWidth, int reqHeight)
+	{
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inJustDecodeBounds = true;
 		BitmapFactory.decodeResource(Shared.context.getResources(), resource);
@@ -74,21 +80,23 @@ public class Utils {
 	/**
 	 * Downscales a bitmap by the specified factor
 	 */
-	public static Bitmap downscaleBitmap(Bitmap wallpaper, int factor) {
+	public static Bitmap downscaleBitmap(Bitmap wallpaper, int factor)
+	{
 		// convert to bitmap and get the center
 		int widthPixels = wallpaper.getWidth() / factor;
 		int heightPixels = wallpaper.getHeight() / factor;
 		return ThumbnailUtils.extractThumbnail(wallpaper, widthPixels, heightPixels);
 	}
 
-	public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+	public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight)
+	{
 		// Raw height and width of image
 		final int height = options.outHeight;
 		final int width = options.outWidth;
 		int inSampleSize = 1;
 
-		if (height > reqHeight || width > reqWidth) {
-
+		if (height > reqHeight || width > reqWidth)
+		{
 			// Calculate ratios of height and width to requested height and
 			// width
 			final int heightRatio = Math.round((float) height / (float) reqHeight);

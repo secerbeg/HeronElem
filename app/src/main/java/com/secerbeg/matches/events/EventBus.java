@@ -19,15 +19,19 @@ public class EventBus
 
 	private Handler mHandler;
 	private static EventBus mInstance = null;
-	private final Map<String, List<EventObserver>> events = Collections.synchronizedMap(new HashMap<String, List<EventObserver>>());
+	private final Map<String, List<EventObserver>> events =
+			Collections.synchronizedMap(new HashMap<String, List<EventObserver>>());
 	private Object obj = new Object();
 
-	private EventBus() {
+	private EventBus()
+	{
 		mHandler = new Handler();
 	}
 
-	public static EventBus getInstance() {
-		if (mInstance == null) {
+	public static EventBus getInstance()
+	{
+		if (mInstance == null)
+		{
 			mInstance = new EventBus();
 		}
 		return mInstance;
