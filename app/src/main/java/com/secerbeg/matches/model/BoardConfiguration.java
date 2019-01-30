@@ -1,6 +1,7 @@
 package com.secerbeg.matches.model;
 
-public class BoardConfiguration {
+public class BoardConfiguration
+{
 
 	private static final int _6 = 6;
 	private static final int _12 = 12;
@@ -15,7 +16,8 @@ public class BoardConfiguration {
 	public final int numRows;
 	public final int time;
 
-	public BoardConfiguration(int difficulty) {
+	public BoardConfiguration(int difficulty)
+	{
 		this.difficulty = difficulty;
 		switch (difficulty) {
 		case 1:

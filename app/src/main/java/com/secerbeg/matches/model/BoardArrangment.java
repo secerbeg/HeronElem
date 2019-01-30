@@ -27,11 +27,18 @@ public class BoardArrangment {
 	 *            this theme
 	 * @return The Bitmap of the tile
 	 */
-	public Bitmap getTileBitmap(int id, int size) {
+	public Bitmap getTileBitmap(int id, int size)
+	{
 		String string = tileUrls.get(id);
-		if (string.contains(Themes.URI_DRAWABLE)) {
+		if (string.contains(Themes.URI_DRAWABLE))
+		{
 			String drawableResourceName = string.substring(Themes.URI_DRAWABLE.length());
-			int drawableResourceId = Shared.context.getResources().getIdentifier(drawableResourceName, "drawable", Shared.context.getPackageName());
+			int drawableResourceId =
+					Shared.context.getResources().getIdentifier(
+							drawableResourceName,
+							"drawable",
+							Shared.context.getPackageName());
+
 			Bitmap bitmap = Utils.scaleDown(drawableResourceId, size, size);
 			return Utils.crop(bitmap, size, size);
 		}

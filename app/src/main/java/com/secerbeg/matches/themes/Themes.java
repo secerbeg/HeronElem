@@ -7,30 +7,31 @@ import com.secerbeg.matches.utils.Utils;
 
 import java.util.ArrayList;
 
-public class Themes {
-
+public class Themes
+{
 	public static String URI_DRAWABLE = "drawable://";
 
-	public static Theme createAnimalsTheme()
+	public static Theme createWordsTheme()
 	{
 		Theme theme = new Theme();
 		theme.id = 1;
-		theme.name = "Animals" ;
-		theme.backgroundImageUrl = URI_DRAWABLE + "back_animals";
+		theme.name = "Words" ;
+		theme.backgroundImageUrl = URI_DRAWABLE + "back_words";
 		theme.tileImageUrls = new ArrayList<String>();
 		// 40 drawables
-		for (int i = 1; i <= 28; i++)
+		for (int i = 1; i <= 27; i++)
 		{
-			theme.tileImageUrls.add(URI_DRAWABLE + String.format("animals_%d", i));
+			theme.tileImageUrls.add(URI_DRAWABLE + String.format("week26_%d", i));
 		}
 		return theme;
 	}
 
-	public static Theme createMosterTheme()
+
+	public static Theme createMonsterTheme()
 	{
 		Theme theme = new Theme();
 		theme.id = 2;
-		theme.name = "Mosters";
+		theme.name = "Monsters";
 		theme.backgroundImageUrl = URI_DRAWABLE + "back_horror";
 		theme.tileImageUrls = new ArrayList<String>();
 		// 40 drawables
@@ -41,20 +42,9 @@ public class Themes {
 		return theme;
 	}
 
-	public static Theme createEmojiTheme()
-	{
-		Theme theme = new Theme();
-		theme.id = 3;
-		theme.name = "Emoji";
-		theme.backgroundImageUrl = URI_DRAWABLE + "background";
-		theme.tileImageUrls = new ArrayList<String>();
-		// 40 drawables
-		for (int i = 1; i <= 40; i++) {
-			theme.tileImageUrls.add(URI_DRAWABLE + String.format("emoji_%d", i));
-		}
-		return theme;
-	}
-	
+
+
+
 	public static Bitmap getBackgroundImage(Theme theme)
 	{
 		String drawableResourceName =
