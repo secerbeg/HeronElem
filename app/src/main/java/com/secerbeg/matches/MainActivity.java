@@ -41,7 +41,7 @@ public class MainActivity extends FragmentActivity
 		// set background
 		setBackgroundImage();
 
-		// set menu
+		// Initial view and setting up of  MENU
 		ScreenController.getInstance().openScreen(Screen.MENU);
 	}
 

@@ -3,6 +3,7 @@ package com.secerbeg.matches.engine;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.secerbeg.matches.R;
 import com.secerbeg.matches.common.Shared;
@@ -11,6 +12,7 @@ import com.secerbeg.matches.fragments.DifficultySelectFragment;
 import com.secerbeg.matches.fragments.GameFragment;
 import com.secerbeg.matches.fragments.MenuFragment;
 import com.secerbeg.matches.fragments.ThemeSelectFragment;
+import com.secerbeg.matches.fragments.WeekdaySelectFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +56,8 @@ public class ScreenController
 		MENU,
 		GAME,
 		DIFFICULTY,
-		THEME_SELECT
+		THEME_SELECT,
+		WEEKDAY_SELECT
 	}
 
 	/**
@@ -82,10 +85,13 @@ public class ScreenController
 			openedScreens.remove(openedScreens.size() - 1);
 			openedScreens.remove(openedScreens.size() - 1);
 		}
+
+
 		Fragment fragment = getFragment(screen);
 		FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 		fragmentTransaction.replace(R.id.fragment_container, fragment);
 		fragmentTransaction.commit();
+
 		openedScreens.add(screen);
 	}
 
@@ -123,19 +129,27 @@ public class ScreenController
 	 */
 	private Fragment getFragment(Screen screen)
 	{
+		Fragment fragment = null;
 		switch (screen)
 		{
-		case MENU:
-			return new MenuFragment();
-		case DIFFICULTY:
-			return new DifficultySelectFragment();
-		case GAME:
-			return new GameFragment();
-		case THEME_SELECT:
-			return new ThemeSelectFragment();
-		default:
-			break;
+			case MENU:
+				fragment = new MenuFragment();
+				break;
+			case DIFFICULTY:
+				fragment = new DifficultySelectFragment();
+				break;
+			case GAME:
+				fragment =  new GameFragment();
+				break;
+			case THEME_SELECT:
+				fragment =  new ThemeSelectFragment();
+				break;
+			case WEEKDAY_SELECT:
+				fragment =  new WeekdaySelectFragment();
+				break;
+			default:
+				break;
 		}
-		return null;
+		return fragment;
 	}
 }

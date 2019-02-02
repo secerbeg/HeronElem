@@ -24,6 +24,7 @@ import com.secerbeg.matches.events.ui.NextGameEvent;
 import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
 import com.secerbeg.matches.events.ui.ThemeSelectedEvent;
+import com.secerbeg.matches.events.ui.WeekdaySelectedEvent;
 import com.secerbeg.matches.model.BoardArrangment;
 import com.secerbeg.matches.model.BoardConfiguration;
 import com.secerbeg.matches.model.Game;
@@ -79,6 +80,7 @@ public class Engine extends EventObserverAdapter
 		Shared.eventBus.listen(BackGameEvent.TYPE, this);
 		Shared.eventBus.listen(NextGameEvent.TYPE, this);
 		Shared.eventBus.listen(ResetBackgroundEvent.TYPE, this);
+		Shared.eventBus.listen(WeekdaySelectedEvent.TYPE, this);
 	}
 
 	public void stop()
@@ -96,6 +98,7 @@ public class Engine extends EventObserverAdapter
 		Shared.eventBus.unlisten(BackGameEvent.TYPE, this);
 		Shared.eventBus.unlisten(NextGameEvent.TYPE, this);
 		Shared.eventBus.unlisten(ResetBackgroundEvent.TYPE, this);
+		Shared.eventBus.unlisten(WeekdaySelectedEvent.TYPE, this);
 
 		mInstance = null;
 	}
@@ -118,12 +121,10 @@ public class Engine extends EventObserverAdapter
 					Bitmap bitmap = Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
 					return bitmap;
 				}
-
 				protected void onPostExecute(Bitmap bitmap)
 				{
 					mBackgroundImage.setImageBitmap(bitmap);
 				};
-
 			}.execute();
 		}
 	}
@@ -138,7 +139,9 @@ public class Engine extends EventObserverAdapter
 	public void onEvent(NextGameEvent event)
 	{
 		PopupManager.closePopup();
+
 		int difficulty = mPlayingGame.boardConfiguration.difficulty;
+
 		if (mPlayingGame.gameState.achievedStars == 3 && difficulty < 6)
 		{
 			difficulty++;
@@ -157,9 +160,18 @@ public class Engine extends EventObserverAdapter
 	public void onEvent(ThemeSelectedEvent event)
 	{
 		mSelectedTheme = event.theme;
-		mScreenController.openScreen(Screen.DIFFICULTY);
-		AsyncTask<Void, Void, TransitionDrawable> task = new AsyncTask<Void, Void, TransitionDrawable>() {
 
+		if (mSelectedTheme.name.equals("Monsters"))
+		{
+			mScreenController.openScreen(Screen.DIFFICULTY);
+		}
+		else
+		{
+			mScreenController.openScreen(Screen.WEEKDAY_SELECT);
+		}
+
+		AsyncTask<Void, Void, TransitionDrawable> task = new AsyncTask<Void, Void, TransitionDrawable>()
+		{
 			@Override
 			protected TransitionDrawable doInBackground(Void... params)
 			{
@@ -183,6 +195,40 @@ public class Engine extends EventObserverAdapter
 		};
 		task.execute();
 	}
+
+
+
+	@Override
+	public void onEvent(WeekdaySelectedEvent event)
+	{
+		mSelectedTheme = event.theme;
+		mScreenController.openScreen(Screen.DIFFICULTY);
+		AsyncTask<Void, Void, TransitionDrawable> task = new AsyncTask<Void, Void, TransitionDrawable>()
+		{
+			@Override
+			protected TransitionDrawable doInBackground(Void... params)
+			{
+				Bitmap bitmap = Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
+				Bitmap backgroundImage = Themes.getBackgroundImage(mSelectedTheme);
+				backgroundImage = Utils.crop(backgroundImage, Utils.screenHeight(), Utils.screenWidth());
+				Drawable backgrounds[] = new Drawable[2];
+				backgrounds[0] = new BitmapDrawable(Shared.context.getResources(), bitmap);
+				backgrounds[1] = new BitmapDrawable(Shared.context.getResources(), backgroundImage);
+				TransitionDrawable crossfader = new TransitionDrawable(backgrounds);
+				return crossfader;
+			}
+
+			@Override
+			protected void onPostExecute(TransitionDrawable result)
+			{
+				super.onPostExecute(result);
+				mBackgroundImage.setImageDrawable(result);
+				result.startTransition(2000);
+			}
+		};
+		task.execute();
+	}
+
 
 	@Override
 	public void onEvent(DifficultySelectedEvent event)

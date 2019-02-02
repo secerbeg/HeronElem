@@ -3,4 +3,6 @@
 
     <string name="app_name">iHeron Game</string>
     <string name="debug">regular</string>
+    <string name="Monsters">Monsters</string>
+
 </resources>

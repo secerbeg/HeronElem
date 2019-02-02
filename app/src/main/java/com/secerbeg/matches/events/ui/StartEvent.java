@@ -12,7 +12,8 @@ public class StartEvent extends AbstractEvent
 	public static final String TYPE = StartEvent.class.getName();
 
 	@Override
-	protected void fire(EventObserver eventObserver) {
+	protected void fire(EventObserver eventObserver)
+	{
 		eventObserver.onEvent(this);
 	}
 

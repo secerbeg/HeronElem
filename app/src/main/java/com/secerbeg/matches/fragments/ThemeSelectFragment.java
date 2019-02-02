@@ -35,14 +35,13 @@ public class ThemeSelectFragment extends Fragment
 
 		View monsters =
 				this.preapareMonstersViewAndTheme(view);
+
 		View words =
 				this.preapareWordsViewAndTheme(view);
 
-		/**
-		 * Imporove performance first!!!
-		 */
 		animateShow(monsters);
 		animateShow(words);
+
 		return view;
 	}
 
@@ -101,26 +100,11 @@ public class ThemeSelectFragment extends Fragment
 	 * @return
 	 */
 	private View  preapareWordsViewAndTheme (View view)
-
 	{
-		View words =
-				view.findViewById(R.id.theme_words_container);
+		View words = view.findViewById(R.id.theme_words_container);
+		final Theme themeWords = Themes.createDefaultWordsTheme();
 
-		final Theme themeWords = Themes.createWordsTheme();
-
-		setStars((ImageView) words.findViewById(R.id.theme_words), themeWords, "words");
-		words.setOnClickListener(
-				new View.OnClickListener()
-				{
-					@Override
-					public void onClick(View v)
-					{
-						Shared.eventBus.notify(new ThemeSelectedEvent(themeWords));
-					}
-				});
-
-		return words;
-
+		return invokeOnClickListener(words,themeWords);
 	}
 
 	/**
@@ -138,17 +122,28 @@ public class ThemeSelectFragment extends Fragment
 				(ImageView) monsters.findViewById(R.id.theme_monsters),
 				themeMonsters,
 				"monsters");
-		monsters.setOnClickListener(
+
+		return invokeOnClickListener( monsters, themeMonsters );
+	}
+
+	/**
+	 *
+	 * @param view
+	 * @param theme
+	 * @return @{@link View}
+	 */
+	private View invokeOnClickListener(View view, final Theme theme)
+	{
+		view.setOnClickListener(
 				new View.OnClickListener()
 				{
 					@Override
 					public void onClick(View v)
 					{
-						Shared.eventBus.notify(new ThemeSelectedEvent(themeMonsters));
+						Shared.eventBus.notify(new ThemeSelectedEvent(theme));
 					}
 				});
-
-		return monsters;
+		return  view;
 	}
 
 }

@@ -10,13 +10,14 @@ import com.secerbeg.matches.events.ui.NextGameEvent;
 import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
 import com.secerbeg.matches.events.ui.ThemeSelectedEvent;
+import com.secerbeg.matches.events.ui.WeekdaySelectedEvent;
 
 /**
  *
  * @author Mirza Secerbegovic
  */
-public interface EventObserver {
-
+public interface EventObserver
+{
 	void onEvent(FlipCardEvent event);
 
 	void onEvent(DifficultySelectedEvent event);
@@ -34,6 +35,8 @@ public interface EventObserver {
 	void onEvent(BackGameEvent event);
 
 	void onEvent(NextGameEvent event);
+
+	void onEvent(WeekdaySelectedEvent event);
 
 	void onEvent(ResetBackgroundEvent event);
 

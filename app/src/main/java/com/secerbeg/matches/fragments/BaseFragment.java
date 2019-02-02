@@ -13,6 +13,7 @@ import com.secerbeg.matches.events.ui.NextGameEvent;
 import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
 import com.secerbeg.matches.events.ui.ThemeSelectedEvent;
+import com.secerbeg.matches.events.ui.WeekdaySelectedEvent;
 
 public class BaseFragment extends Fragment implements EventObserver
 {
@@ -74,6 +75,12 @@ public class BaseFragment extends Fragment implements EventObserver
 
 	@Override
 	public void onEvent(ResetBackgroundEvent event)
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void onEvent(WeekdaySelectedEvent event)
 	{
 		throw new UnsupportedOperationException();
 	}
