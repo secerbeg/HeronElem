@@ -9,7 +9,6 @@ import com.secerbeg.matches.events.ui.FlipCardEvent;
 import com.secerbeg.matches.events.ui.NextGameEvent;
 import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
-import com.secerbeg.matches.events.ui.ThemeSelectedEvent;
 import com.secerbeg.matches.events.ui.WeekdaySelectedEvent;
 
 /**
@@ -27,8 +26,6 @@ public interface EventObserver
 	void onEvent(FlipDownCardsEvent event);
 
 	void onEvent(StartEvent event);
-
-	void onEvent(ThemeSelectedEvent event);
 
 	void onEvent(GameWonEvent event);
 

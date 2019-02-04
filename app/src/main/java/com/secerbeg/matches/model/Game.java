@@ -1,6 +1,6 @@
 package com.secerbeg.matches.model;
 
-import com.secerbeg.matches.themes.Theme;
+import com.secerbeg.matches.day.Day;
 
 /**
  * This is instance of active playing game
@@ -22,7 +22,7 @@ public class Game
 	/**
 	 * The selected theme
 	 */
-	public Theme theme;
+	public Day day;
 
 	public GameState gameState;
 

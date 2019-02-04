@@ -3,7 +3,6 @@ package com.secerbeg.matches.engine;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import com.secerbeg.matches.R;
 import com.secerbeg.matches.common.Shared;
@@ -11,7 +10,6 @@ import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.fragments.DifficultySelectFragment;
 import com.secerbeg.matches.fragments.GameFragment;
 import com.secerbeg.matches.fragments.MenuFragment;
-import com.secerbeg.matches.fragments.ThemeSelectFragment;
 import com.secerbeg.matches.fragments.WeekdaySelectFragment;
 
 import java.util.ArrayList;
@@ -56,7 +54,6 @@ public class ScreenController
 		MENU,
 		GAME,
 		DIFFICULTY,
-		THEME_SELECT,
 		WEEKDAY_SELECT
 	}
 
@@ -86,7 +83,6 @@ public class ScreenController
 			openedScreens.remove(openedScreens.size() - 1);
 		}
 
-
 		Fragment fragment = getFragment(screen);
 		FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 		fragmentTransaction.replace(R.id.fragment_container, fragment);
@@ -112,7 +108,7 @@ public class ScreenController
 			Screen screen = openedScreens.get(openedScreens.size() - 1);
 			openedScreens.remove(openedScreens.size() - 1);
 			openScreen(screen);
-			if ((screen == Screen.THEME_SELECT || screen == Screen.MENU) && 
+			if ((screen == Screen.WEEKDAY_SELECT || screen == Screen.MENU) &&
 					(screenToRemove == Screen.DIFFICULTY || screenToRemove == Screen.GAME))
 			{
 				Shared.eventBus.notify(new ResetBackgroundEvent());
@@ -140,9 +136,6 @@ public class ScreenController
 				break;
 			case GAME:
 				fragment =  new GameFragment();
-				break;
-			case THEME_SELECT:
-				fragment =  new ThemeSelectFragment();
 				break;
 			case WEEKDAY_SELECT:
 				fragment =  new WeekdaySelectFragment();

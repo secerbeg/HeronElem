@@ -57,17 +57,6 @@
         android:adjustViewBounds="true"
         android:scaleType="center"
         android:src="@drawable/title_heron" />
-	
-	<!--<ImageView-->
-        <!--android:id="@+id/tooltip"-->
-        <!--android:layout_width="@dimen/tooltip_width"-->
-        <!--android:layout_height="@dimen/tooltip_height"-->
-        <!--android:layout_alignLeft="@id/google_play_button"-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:layout_marginLeft="@dimen/tooltip_margin_left"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@drawable/tooltip_play"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginBottom="@dimen/tooltip_margin_bottom"/>-->
+
 
 </RelativeLayout>

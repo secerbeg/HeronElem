@@ -3,7 +3,7 @@ package com.secerbeg.matches.model;
 import android.graphics.Bitmap;
 
 import com.secerbeg.matches.common.Shared;
-import com.secerbeg.matches.themes.Themes;
+import com.secerbeg.matches.day.Days;
 import com.secerbeg.matches.utils.Utils;
 
 import java.util.Map;
@@ -25,15 +25,15 @@ public class BoardArrangment
 	 * 
 	 * @param id
 	 *            The id is the number between 0 and number of possible tiles of
-	 *            this theme
+	 *            this day
 	 * @return The Bitmap of the tile
 	 */
 	public Bitmap getTileBitmap(int id, int size)
 	{
 		String string = tileUrls.get(id);
-		if (string.contains(Themes.URI_DRAWABLE))
+		if (string.contains(Days.URI_DRAWABLE))
 		{
-			String drawableResourceName = string.substring(Themes.URI_DRAWABLE.length());
+			String drawableResourceName = string.substring(Days.URI_DRAWABLE.length());
 			int drawableResourceId =
 					Shared.context.getResources().getIdentifier(
 							drawableResourceName,

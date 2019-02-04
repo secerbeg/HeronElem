@@ -8,7 +8,7 @@ public class BoardConfiguration
 	private static final int _18 = 18;
 	private static final int _28 = 28;
 	private static final int _32 = 32;
-	private static final int _50 = 50;
+	private static final int _40 = 40;
 
 	public final int difficulty;
 	public final int numTiles;
@@ -52,8 +52,8 @@ public class BoardConfiguration
 			time = 180;
 			break;
 		case 6:
-			numTiles = _50;
-			numTilesInRow = 10;
+			numTiles = _40;
+			numTilesInRow = 8;
 			numRows = 5;
 			time = 210;
 			break;	

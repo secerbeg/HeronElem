@@ -12,6 +12,8 @@ import com.secerbeg.matches.R;
 import com.secerbeg.matches.common.Memory;
 import com.secerbeg.matches.common.Music;
 import com.secerbeg.matches.common.Shared;
+import com.secerbeg.matches.day.Day;
+import com.secerbeg.matches.day.Days;
 import com.secerbeg.matches.engine.ScreenController.Screen;
 import com.secerbeg.matches.events.EventObserverAdapter;
 import com.secerbeg.matches.events.engine.FlipDownCardsEvent;
@@ -23,14 +25,12 @@ import com.secerbeg.matches.events.ui.FlipCardEvent;
 import com.secerbeg.matches.events.ui.NextGameEvent;
 import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
-import com.secerbeg.matches.events.ui.ThemeSelectedEvent;
 import com.secerbeg.matches.events.ui.WeekdaySelectedEvent;
 import com.secerbeg.matches.model.BoardArrangment;
 import com.secerbeg.matches.model.BoardConfiguration;
 import com.secerbeg.matches.model.Game;
 import com.secerbeg.matches.model.GameState;
-import com.secerbeg.matches.themes.Theme;
-import com.secerbeg.matches.themes.Themes;
+
 import com.secerbeg.matches.ui.PopupManager;
 import com.secerbeg.matches.utils.Clock;
 import com.secerbeg.matches.utils.Utils;
@@ -52,7 +52,7 @@ public class Engine extends EventObserverAdapter
 	private int mFlippedId = -1;
 	private int mToFlip = -1;
 	private ScreenController mScreenController;
-	private Theme mSelectedTheme;
+	private Day mSelectedDay;
 	private ImageView mBackgroundImage;
 	private Handler mHandler;
 
@@ -76,7 +76,6 @@ public class Engine extends EventObserverAdapter
 		Shared.eventBus.listen(DifficultySelectedEvent.TYPE, this);
 		Shared.eventBus.listen(FlipCardEvent.TYPE, this);
 		Shared.eventBus.listen(StartEvent.TYPE, this);
-		Shared.eventBus.listen(ThemeSelectedEvent.TYPE, this);
 		Shared.eventBus.listen(BackGameEvent.TYPE, this);
 		Shared.eventBus.listen(NextGameEvent.TYPE, this);
 		Shared.eventBus.listen(ResetBackgroundEvent.TYPE, this);
@@ -94,7 +93,6 @@ public class Engine extends EventObserverAdapter
 		Shared.eventBus.unlisten(DifficultySelectedEvent.TYPE, this);
 		Shared.eventBus.unlisten(FlipCardEvent.TYPE, this);
 		Shared.eventBus.unlisten(StartEvent.TYPE, this);
-		Shared.eventBus.unlisten(ThemeSelectedEvent.TYPE, this);
 		Shared.eventBus.unlisten(BackGameEvent.TYPE, this);
 		Shared.eventBus.unlisten(NextGameEvent.TYPE, this);
 		Shared.eventBus.unlisten(ResetBackgroundEvent.TYPE, this);
@@ -132,7 +130,7 @@ public class Engine extends EventObserverAdapter
 	@Override
 	public void onEvent(StartEvent event)
 	{
-		mScreenController.openScreen(Screen.THEME_SELECT);
+		mScreenController.openScreen(Screen.WEEKDAY_SELECT);
 	}
 
 	@Override
@@ -157,59 +155,18 @@ public class Engine extends EventObserverAdapter
 	}
 
 	@Override
-	public void onEvent(ThemeSelectedEvent event)
-	{
-		mSelectedTheme = event.theme;
-
-		if (mSelectedTheme.name.equals("Monsters"))
-		{
-			mScreenController.openScreen(Screen.DIFFICULTY);
-		}
-		else
-		{
-			mScreenController.openScreen(Screen.WEEKDAY_SELECT);
-		}
-
-		AsyncTask<Void, Void, TransitionDrawable> task = new AsyncTask<Void, Void, TransitionDrawable>()
-		{
-			@Override
-			protected TransitionDrawable doInBackground(Void... params)
-			{
-				Bitmap bitmap = Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
-				Bitmap backgroundImage = Themes.getBackgroundImage(mSelectedTheme);
-				backgroundImage = Utils.crop(backgroundImage, Utils.screenHeight(), Utils.screenWidth());
-				Drawable backgrounds[] = new Drawable[2];
-				backgrounds[0] = new BitmapDrawable(Shared.context.getResources(), bitmap);
-				backgrounds[1] = new BitmapDrawable(Shared.context.getResources(), backgroundImage);
-				TransitionDrawable crossfader = new TransitionDrawable(backgrounds);
-				return crossfader;
-			}
-
-			@Override
-			protected void onPostExecute(TransitionDrawable result)
-			{
-				super.onPostExecute(result);
-				mBackgroundImage.setImageDrawable(result);
-				result.startTransition(2000);
-			}
-		};
-		task.execute();
-	}
-
-
-
-	@Override
 	public void onEvent(WeekdaySelectedEvent event)
 	{
-		mSelectedTheme = event.theme;
+		mSelectedDay = event.day;
 		mScreenController.openScreen(Screen.DIFFICULTY);
+
 		AsyncTask<Void, Void, TransitionDrawable> task = new AsyncTask<Void, Void, TransitionDrawable>()
 		{
 			@Override
 			protected TransitionDrawable doInBackground(Void... params)
 			{
 				Bitmap bitmap = Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
-				Bitmap backgroundImage = Themes.getBackgroundImage(mSelectedTheme);
+				Bitmap backgroundImage = Days.getBackgroundImage(mSelectedDay);
 				backgroundImage = Utils.crop(backgroundImage, Utils.screenHeight(), Utils.screenWidth());
 				Drawable backgrounds[] = new Drawable[2];
 				backgrounds[0] = new BitmapDrawable(Shared.context.getResources(), bitmap);
@@ -229,6 +186,10 @@ public class Engine extends EventObserverAdapter
 		task.execute();
 	}
 
+	/**
+	 *
+	 * @param event
+	 */
 
 	@Override
 	public void onEvent(DifficultySelectedEvent event)
@@ -236,7 +197,7 @@ public class Engine extends EventObserverAdapter
 		mFlippedId = -1;
 		mPlayingGame = new Game();
 		mPlayingGame.boardConfiguration = new BoardConfiguration(event.difficulty);
-		mPlayingGame.theme = mSelectedTheme;
+		mPlayingGame.day = mSelectedDay;
 		mToFlip = mPlayingGame.boardConfiguration.numTiles;
 
 		// arrange board
@@ -254,7 +215,11 @@ public class Engine extends EventObserverAdapter
 		// build pairs
 		// result {0,1,2,...n} // n-number of tiles
 		List<Integer> ids = new ArrayList<Integer>();
-		for (int i = 0; i < boardConfiguration.numTiles; i++)
+
+		int tilesAllowed =
+				getMaxPossibleTiles(boardConfiguration);
+
+		for (int i = 0; i < tilesAllowed; i++)
 		{
 			ids.add(i);
 		}
@@ -263,7 +228,7 @@ public class Engine extends EventObserverAdapter
 		Collections.shuffle(ids);
 
 		// place the board
-		List<String> tileImageUrls = mPlayingGame.theme.tileImageUrls;
+		List<String> tileImageUrls = mPlayingGame.day.tileImageUrls;
 		Collections.shuffle(tileImageUrls);
 		boardArrangment.pairs = new HashMap<Integer, Integer>();
 		boardArrangment.tileUrls = new HashMap<Integer, String>();
@@ -285,6 +250,22 @@ public class Engine extends EventObserverAdapter
 		}
 
 		mPlayingGame.boardArrangment = boardArrangment;
+	}
+
+	/**
+	 * Captures max possible tiles
+	 * @param boardConfiguration
+	 * @return max possible tiles
+	 */
+	private int getMaxPossibleTiles(BoardConfiguration boardConfiguration)
+	{
+		int maxPossibleTiles =
+				mPlayingGame.day.tileImageUrls.size()* 2;
+		if (boardConfiguration.numTiles < maxPossibleTiles)
+		{
+			maxPossibleTiles = boardConfiguration.numTiles;
+		}
+		return maxPossibleTiles;
 	}
 
 	@Override
@@ -345,19 +326,16 @@ public class Engine extends EventObserverAdapter
 					gameState.achievedScore =
 							mPlayingGame.boardConfiguration.difficulty *
 									gameState.remainedSeconds *
-									mPlayingGame.theme.id;
+									mPlayingGame.day.id;
 
 					// save to memory
 					Memory.save(
-							mPlayingGame.theme.id,
+							mPlayingGame.day.id,
 							mPlayingGame.boardConfiguration.difficulty,
 							gameState.achievedStars);
-					Memory.saveTime(mPlayingGame.theme.id,
+					Memory.saveTime(mPlayingGame.day.id,
 							mPlayingGame.boardConfiguration.difficulty,
 							gameState.passedSeconds);
-
-
-
 					Shared.eventBus.notify(new GameWonEvent(gameState), 1200);
 				}
 			} else
@@ -376,9 +354,9 @@ public class Engine extends EventObserverAdapter
 		return mPlayingGame;
 	}
 
-	public Theme getSelectedTheme()
+	public Day getSelectedDay()
 	{
-		return mSelectedTheme;
+		return mSelectedDay;
 	}
 
 	public void setBackgroundImageView(ImageView backgroundImage)

@@ -16,8 +16,8 @@ import android.widget.TextView;
 import com.secerbeg.matches.R;
 import com.secerbeg.matches.common.Memory;
 import com.secerbeg.matches.common.Shared;
+import com.secerbeg.matches.day.Day;
 import com.secerbeg.matches.events.ui.DifficultySelectedEvent;
-import com.secerbeg.matches.themes.Theme;
 import com.secerbeg.matches.ui.DifficultyView;
 
 public class DifficultySelectFragment extends Fragment
@@ -32,37 +32,37 @@ public class DifficultySelectFragment extends Fragment
         View view =
                 LayoutInflater.from(Shared.context).inflate(
                         R.layout.difficulty_select_fragment, container, false);
-        Theme theme =
-                Shared.engine.getSelectedTheme();
+        Day day =
+                Shared.engine.getSelectedDay();
 
         DifficultyView difficulty1 =
                 (DifficultyView) view.findViewById(R.id.select_difficulty_1);
-        difficulty1.setDifficulty(1, Memory.getHighStars(theme.id, 1));
+        difficulty1.setDifficulty(1, Memory.getHighStars(day.id, 1));
         setOnClick(difficulty1, 1);
 
         DifficultyView difficulty2 =
                 (DifficultyView) view.findViewById(R.id.select_difficulty_2);
-        difficulty2.setDifficulty(2, Memory.getHighStars(theme.id, 2));
+        difficulty2.setDifficulty(2, Memory.getHighStars(day.id, 2));
         setOnClick(difficulty2, 2);
 
         DifficultyView difficulty3 =
                 (DifficultyView) view.findViewById(R.id.select_difficulty_3);
-        difficulty3.setDifficulty(3, Memory.getHighStars(theme.id, 3));
+        difficulty3.setDifficulty(3, Memory.getHighStars(day.id, 3));
         setOnClick(difficulty3, 3);
 
         DifficultyView difficulty4 =
                 (DifficultyView) view.findViewById(R.id.select_difficulty_4);
-        difficulty4.setDifficulty(4, Memory.getHighStars(theme.id, 4));
+        difficulty4.setDifficulty(4, Memory.getHighStars(day.id, 4));
         setOnClick(difficulty4, 4);
 
         DifficultyView difficulty5 =
                 (DifficultyView) view.findViewById(R.id.select_difficulty_5);
-        difficulty5.setDifficulty(5, Memory.getHighStars(theme.id, 5));
+        difficulty5.setDifficulty(5, Memory.getHighStars(day.id, 5));
         setOnClick(difficulty5, 5);
 
         DifficultyView difficulty6 =
                 (DifficultyView) view.findViewById(R.id.select_difficulty_6);
-        difficulty6.setDifficulty(6, Memory.getHighStars(theme.id, 6));
+        difficulty6.setDifficulty(6, Memory.getHighStars(day.id, 6));
         setOnClick(difficulty6, 6);
 
 
@@ -75,40 +75,40 @@ public class DifficultySelectFragment extends Fragment
         TextView text1 = (TextView) view.findViewById(R.id.time_difficulty_1);
         text1.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
         text1.setTypeface(type);
-        text1.setText(getBestTimeForStage(theme.id, 1));
+        text1.setText(getBestTimeForStage(day.id, 1));
 
         TextView text2 = (TextView) view.findViewById(R.id.time_difficulty_2);
         text2.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
         text2.setTypeface(type);
-        text2.setText(getBestTimeForStage(theme.id, 2));
+        text2.setText(getBestTimeForStage(day.id, 2));
 
         TextView text3 = (TextView) view.findViewById(R.id.time_difficulty_3);
         text3.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
         text3.setTypeface(type);
-        text3.setText(getBestTimeForStage(theme.id, 3));
+        text3.setText(getBestTimeForStage(day.id, 3));
 
         TextView text4 = (TextView) view.findViewById(R.id.time_difficulty_4);
         text4.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
         text4.setTypeface(type);
-        text4.setText(getBestTimeForStage(theme.id, 4));
+        text4.setText(getBestTimeForStage(day.id, 4));
 
         TextView text5 = (TextView) view.findViewById(R.id.time_difficulty_5);
         text5.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
         text5.setTypeface(type);
-        text5.setText(getBestTimeForStage(theme.id, 5));
+        text5.setText(getBestTimeForStage(day.id, 5));
 
         TextView text6 = (TextView) view.findViewById(R.id.time_difficulty_6);
         text6.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
         text6.setTypeface(type);
-        text6.setText(getBestTimeForStage(theme.id, 6));
+        text6.setText(getBestTimeForStage(day.id, 6));
 
         return view;
 
     }
 
-    private String getBestTimeForStage(int theme, int difficulty)
+    private String getBestTimeForStage(int day, int difficulty)
     {
-        int bestTime = Memory.getBestTime(theme, difficulty);
+        int bestTime = Memory.getBestTime(day, difficulty);
         if (bestTime != -1)
         {
             int minutes = (bestTime % 3600) / 60;

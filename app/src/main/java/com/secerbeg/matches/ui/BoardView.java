@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,8 @@ public class BoardView extends LinearLayout
 	private boolean mLocked = false;
 	private int mSize;
 
-	public BoardView(Context context) {
+	public BoardView(Context context)
+	{
 		this(context, null);
 	}
 
@@ -96,23 +98,24 @@ public class BoardView extends LinearLayout
 	/**
 	 * Build the board
 	 */
-	private void buildBoard() {
-
-		for (int row = 0; row < mBoardConfiguration.numRows; row++) {
-			// add row
+	private void buildBoard()
+	{
+		for (int row = 0; row < mBoardConfiguration.numRows; row++)
+		{
 			addBoardRow(row);
 		}
 
 		setClipChildren(false);
 	}
 
-	private void addBoardRow(int rowNum) {
-
+	private void addBoardRow(int rowNum)
+	{
 		LinearLayout linearLayout = new LinearLayout(getContext());
 		linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 		linearLayout.setGravity(Gravity.CENTER);
 
-		for (int tile = 0; tile < mBoardConfiguration.numTilesInRow; tile++) {
+		for (int tile = 0; tile < mBoardConfiguration.numTilesInRow; tile++)
+		{
 			addTile(rowNum * mBoardConfiguration.numTilesInRow + tile, linearLayout);
 		}
 
@@ -121,22 +124,25 @@ public class BoardView extends LinearLayout
 		linearLayout.setClipChildren(false);
 	}
 
-	private void addTile(final int id, ViewGroup parent) {
+	private void addTile(final int id, ViewGroup parent)
+	{
 		final TileView tileView = TileView.fromXml(getContext(), parent);
 		tileView.setLayoutParams(mTileLayoutParams);
 		parent.addView(tileView);
 		parent.setClipChildren(false);
 		mViewReference.put(id, tileView);
 
-		new AsyncTask<Void, Void, Bitmap>() {
-
+		new AsyncTask<Void, Void, Bitmap>()
+		{
 			@Override
-			protected Bitmap doInBackground(Void... params) {
+			protected Bitmap doInBackground(Void... params)
+			{
 				return mBoardArrangment.getTileBitmap(id, mSize);
 			}
 
 			@Override
-			protected void onPostExecute(Bitmap result) {
+			protected void onPostExecute(Bitmap result)
+			{
 				tileView.setTileImage(result);
 			}
 		}.execute();
