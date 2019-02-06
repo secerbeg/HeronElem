@@ -41,17 +41,17 @@ public abstract class CountDownClock {
 	private boolean mRunAtStart;
 
 	/**
-	 * @param millisInFuture
+	 * @param millisOnTimer
 	 *            The number of millis in the future from the call to
-	 *            {@link #start} until the countdown is done and
+	 *             until the countdown is done and
 	 *            {@link #onFinish()} is called
 	 * @param countDownInterval
-	 *            The interval in millis at which to execute
-	 *            {@link #onTick(millisUntilFinished)} callbacks
+	 *            The interval in millis at which to execute callbacks
 	 * @param runAtStart
 	 *            True if timer should start running, false if not
 	 */
-	public CountDownClock(long millisOnTimer, long countDownInterval, boolean runAtStart) {
+	public CountDownClock(long millisOnTimer, long countDownInterval, boolean runAtStart)
+	{
 		mMillisInFuture = millisOnTimer;
 		mTotalCountdown = mMillisInFuture;
 		mCountdownInterval = countDownInterval;

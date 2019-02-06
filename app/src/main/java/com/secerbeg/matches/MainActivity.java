@@ -80,7 +80,7 @@ public class MainActivity extends FragmentActivity
 	private void setBackgroundImage()
 	{
 		Bitmap bitmap =
-				Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
+				Utils.scaleDown(R.drawable.background_png, Utils.screenWidth(), Utils.screenHeight());
 		bitmap =
 				Utils.crop(bitmap, Utils.screenHeight(), Utils.screenWidth());
 		bitmap =

@@ -20,7 +20,7 @@ public class Days
             Day day = new Day();
             day.id = 1;
             day.name = "Monday Words" ;
-            day.backgroundImageUrl = URI_DRAWABLE + "back_words";
+            day.backgroundImageUrl = URI_DRAWABLE + "background_png";
             day.tileImageUrls = new ArrayList<String>();
             String weekFormat = getWeekFormat();
             for (int i = 1; i <= 24; i++)
@@ -40,7 +40,7 @@ public class Days
             Day day = new Day();
             day.id = 2;
             day.name = "Wednesday Words" ;
-            day.backgroundImageUrl = URI_DRAWABLE + "back_words";
+            day.backgroundImageUrl = URI_DRAWABLE + "background_png";
             day.tileImageUrls = new ArrayList<String>();
 
             String weekFormat = getWeekFormat();

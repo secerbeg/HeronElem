@@ -31,7 +31,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/popup_button_star_margin_1"
         android:layout_marginTop="@dimen/popup_button_star_margin_top"
-        android:src="@drawable/level_complete_star"
+        android:src="@drawable/level_complete_star_pt"
         android:visibility="invisible" />
 
     <ImageView
@@ -42,7 +42,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/popup_button_star_margin_2"
         android:layout_marginTop="@dimen/popup_button_star_margin_top"
-        android:src="@drawable/level_complete_star"
+        android:src="@drawable/level_complete_star_pt"
         android:visibility="invisible" />
 
     <ImageView
@@ -53,7 +53,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/popup_button_star_margin_3"
         android:layout_marginTop="@dimen/popup_button_star_margin_top"
-        android:src="@drawable/level_complete_star"
+        android:src="@drawable/level_complete_star_pt"
         android:visibility="invisible" />
 
     <TextView
