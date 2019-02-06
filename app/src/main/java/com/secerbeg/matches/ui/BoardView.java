@@ -73,7 +73,8 @@ public class BoardView extends LinearLayout
 		return (BoardView) LayoutInflater.from(context).inflate(R.layout.board_view, parent, false);
 	}
 
-	public void setBoard(Game game) {
+	public void setBoard(Game game)
+    {
 		mBoardConfiguration = game.boardConfiguration;
 		mBoardArrangment = game.boardArrangment;
 		// calc prefered tiles in width and height
@@ -81,7 +82,8 @@ public class BoardView extends LinearLayout
 		float density = getResources().getDisplayMetrics().density;
 		singleMargin = Math.max((int) (1 * density), (int) (singleMargin - mBoardConfiguration.difficulty * 2 * density));
 		int sumMargin = 0;
-		for (int row = 0; row < mBoardConfiguration.numRows; row++) {
+		for (int row = 0; row < mBoardConfiguration.numRows; row++)
+		{
 			sumMargin += singleMargin * 2;
 		}
 		int tilesHeight = (mScreenHeight - sumMargin) / mBoardConfiguration.numRows;
@@ -147,14 +149,18 @@ public class BoardView extends LinearLayout
 			}
 		}.execute();
 
-		tileView.setOnClickListener(new OnClickListener() {
+		tileView.setOnClickListener(new OnClickListener()
+        {
 
 			@Override
-			public void onClick(View v) {
-				if (!mLocked && tileView.isFlippedDown()) {
+			public void onClick(View v)
+            {
+				if (!mLocked && tileView.isFlippedDown())
+				{
 					tileView.flipUp();
 					flippedUp.add(id);
-					if (flippedUp.size() == 2) {
+					if (flippedUp.size() == 2)
+					{
 						mLocked = true;
 					}
 					Shared.eventBus.notify(new FlipCardEvent(id));
@@ -173,26 +179,32 @@ public class BoardView extends LinearLayout
 		animatorSet.start();
 	}
 
-	public void flipDownAll() {
-		for (Integer id : flippedUp) {
+	public void flipDownAll()
+    {
+		for (Integer id : flippedUp)
+		{
 			mViewReference.get(id).flipDown();
 		}
 		flippedUp.clear();
 		mLocked = false;
 	}
 
-	public void hideCards(int id1, int id2) {
+	public void hideCards(int id1, int id2)
+    {
 		animateHide(mViewReference.get(id1));
 		animateHide(mViewReference.get(id2));
 		flippedUp.clear();
 		mLocked = false;
 	}
 
-	protected void animateHide(final TileView v) {
+	protected void animateHide(final TileView v)
+    {
 		ObjectAnimator animator = ObjectAnimator.ofFloat(v, "alpha", 0f);
-		animator.addListener(new AnimatorListenerAdapter() {
+		animator.addListener(new AnimatorListenerAdapter()
+        {
 			@Override
-			public void onAnimationEnd(Animator animation) {
+			public void onAnimationEnd(Animator animation)
+            {
 				v.setLayerType(View.LAYER_TYPE_NONE, null);
 				v.setVisibility(View.INVISIBLE);
 			}

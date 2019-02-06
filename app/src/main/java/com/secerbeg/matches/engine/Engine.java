@@ -25,6 +25,7 @@ import com.secerbeg.matches.events.ui.FlipCardEvent;
 import com.secerbeg.matches.events.ui.NextGameEvent;
 import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
+import com.secerbeg.matches.events.ui.WeekSelectedEvent;
 import com.secerbeg.matches.events.ui.WeekdaySelectedEvent;
 import com.secerbeg.matches.model.BoardArrangment;
 import com.secerbeg.matches.model.BoardConfiguration;
@@ -34,6 +35,7 @@ import com.secerbeg.matches.model.GameState;
 import com.secerbeg.matches.ui.PopupManager;
 import com.secerbeg.matches.utils.Clock;
 import com.secerbeg.matches.utils.Utils;
+import com.secerbeg.matches.week.Week;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,6 +55,7 @@ public class Engine extends EventObserverAdapter
 	private int mToFlip = -1;
 	private ScreenController mScreenController;
 	private Day mSelectedDay;
+	private Week mSelectedWeek;
 	private ImageView mBackgroundImage;
 	private Handler mHandler;
 
@@ -80,6 +83,7 @@ public class Engine extends EventObserverAdapter
 		Shared.eventBus.listen(NextGameEvent.TYPE, this);
 		Shared.eventBus.listen(ResetBackgroundEvent.TYPE, this);
 		Shared.eventBus.listen(WeekdaySelectedEvent.TYPE, this);
+        Shared.eventBus.listen(WeekSelectedEvent.TYPE, this);
 	}
 
 	public void stop()
@@ -97,7 +101,7 @@ public class Engine extends EventObserverAdapter
 		Shared.eventBus.unlisten(NextGameEvent.TYPE, this);
 		Shared.eventBus.unlisten(ResetBackgroundEvent.TYPE, this);
 		Shared.eventBus.unlisten(WeekdaySelectedEvent.TYPE, this);
-
+        Shared.eventBus.unlisten(WeekSelectedEvent.TYPE, this);
 		mInstance = null;
 	}
 
@@ -130,7 +134,8 @@ public class Engine extends EventObserverAdapter
 	@Override
 	public void onEvent(StartEvent event)
 	{
-		mScreenController.openScreen(Screen.WEEKDAY_SELECT);
+//		mScreenController.openScreen(Screen.WEEKDAY_SELECT);
+		mScreenController.openScreen(Screen.WEEK_SELECT);
 	}
 
 	@Override
@@ -150,8 +155,17 @@ public class Engine extends EventObserverAdapter
 	@Override
 	public void onEvent(BackGameEvent event)
 	{
-		PopupManager.closePopup();
+	    PopupManager.closePopup();
 		mScreenController.openScreen(Screen.DIFFICULTY);
+	}
+
+	@Override
+	public void onEvent(WeekSelectedEvent event)
+	{
+        mSelectedWeek = event.week;
+        mScreenController.openScreen(Screen.WEEKDAY_SELECT);
+
+
 	}
 
 	@Override
@@ -165,9 +179,12 @@ public class Engine extends EventObserverAdapter
 			@Override
 			protected TransitionDrawable doInBackground(Void... params)
 			{
-				Bitmap bitmap = Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
-				Bitmap backgroundImage = Days.getBackgroundImage(mSelectedDay);
-				backgroundImage = Utils.crop(backgroundImage, Utils.screenHeight(), Utils.screenWidth());
+				Bitmap bitmap =
+                        Utils.scaleDown(R.drawable.background, Utils.screenWidth(), Utils.screenHeight());
+				Bitmap backgroundImage =
+                        Days.getBackgroundImage(mSelectedDay);
+				backgroundImage =
+                        Utils.crop(backgroundImage, Utils.screenHeight(), Utils.screenWidth());
 				Drawable backgrounds[] = new Drawable[2];
 				backgrounds[0] = new BitmapDrawable(Shared.context.getResources(), bitmap);
 				backgrounds[1] = new BitmapDrawable(Shared.context.getResources(), backgroundImage);
@@ -363,4 +380,10 @@ public class Engine extends EventObserverAdapter
 	{
 		mBackgroundImage = backgroundImage;
 	}
+
+    public Week getSelectedWeek()
+    {
+        return mSelectedWeek;
+    }
+
 }

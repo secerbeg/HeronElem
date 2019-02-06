@@ -18,14 +18,14 @@ public class Days
         public static Day createMondayWords()
         {
             Day day = new Day();
-            day.id = 2;
+            day.id = 1;
             day.name = "Monday Words" ;
             day.backgroundImageUrl = URI_DRAWABLE + "back_words";
             day.tileImageUrls = new ArrayList<String>();
-
+            String weekFormat = getWeekFormat();
             for (int i = 1; i <= 24; i++)
             {
-                day.tileImageUrls.add(URI_DRAWABLE + String.format("week26mon_%d", i));
+                day.tileImageUrls.add(URI_DRAWABLE + String.format(weekFormat, i));
             }
             return day;
         }
@@ -38,14 +38,15 @@ public class Days
         public static Day createWednesdayWords()
         {
             Day day = new Day();
-            day.id = 3;
+            day.id = 2;
             day.name = "Wednesday Words" ;
             day.backgroundImageUrl = URI_DRAWABLE + "back_words";
             day.tileImageUrls = new ArrayList<String>();
 
+            String weekFormat = getWeekFormat();
             for (int i = 1; i <= 27; i++)
             {
-                day.tileImageUrls.add(URI_DRAWABLE + String.format("week26wed_%d", i));
+                day.tileImageUrls.add(URI_DRAWABLE + String.format( weekFormat, i));
             }
             return day;
         }
@@ -71,5 +72,33 @@ public class Days
                             Utils.screenWidth(),
                             Utils.screenHeight());
             return bitmap;
+        }
+
+
+        public static String getWeekFormat()
+        {
+         int weekNumber = Shared.engine.getSelectedWeek().id;
+
+         String weekFormat = null;
+
+            switch (weekNumber)
+            {
+                case 26:
+                    weekFormat =  "week26mon_%d";
+                    break;
+                case 27:
+                    weekFormat =  "week27mon_%d";
+                    break;
+                case 28:
+                    weekFormat =  "week28mon_%d";
+                    break;
+                case 29:
+                    weekFormat =  "week29mon_%d";
+                    break;
+                    default:
+                        break;
+            }
+
+            return weekFormat;
         }
 }

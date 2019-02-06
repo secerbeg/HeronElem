@@ -10,7 +10,9 @@ import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.fragments.DifficultySelectFragment;
 import com.secerbeg.matches.fragments.GameFragment;
 import com.secerbeg.matches.fragments.MenuFragment;
+import com.secerbeg.matches.fragments.WeekSelectFragment;
 import com.secerbeg.matches.fragments.WeekdaySelectFragment;
+import com.secerbeg.matches.week.Week;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,7 @@ public class ScreenController
 		MENU,
 		GAME,
 		DIFFICULTY,
+		WEEK_SELECT,
 		WEEKDAY_SELECT
 	}
 
@@ -140,6 +143,8 @@ public class ScreenController
 			case WEEKDAY_SELECT:
 				fragment =  new WeekdaySelectFragment();
 				break;
+			case WEEK_SELECT:
+				fragment = new WeekSelectFragment();
 			default:
 				break;
 		}
