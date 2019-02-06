@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingLeft="@dimen/theme_padding"
+    android:paddingRight="@dimen/theme_padding" >
+
+
+    <RelativeLayout
+        android:id="@+id/week26_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/theme_margin"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/week26"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:src="@drawable/week26_fragment" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/week27_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/theme_margin"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/week27"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:src="@drawable/week27_fragment" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/week28_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/theme_margin"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/week28"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:src="@drawable/week28_fragment" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/week2_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/theme_margin"
+        android:layout_weight="1" >
+9
+        <ImageView
+            android:id="@+id/week29"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:src="@drawable/week29_fragment" />
+    </RelativeLayout>
+</LinearLayout>
