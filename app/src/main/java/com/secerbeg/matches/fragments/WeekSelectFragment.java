@@ -19,7 +19,18 @@ public class WeekSelectFragment extends Fragment
 	private Week week;
 
 	public static String URI_DRAWABLE = "drawable://";
+	public static String weekStringValue = "week";
+    public static String containerStringValue = "_container";
+    int[] weeknumbers = {26, 27, 28};
 
+
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
 	@Override
 	public View onCreateView(
 			LayoutInflater inflater,
@@ -33,43 +44,31 @@ public class WeekSelectFragment extends Fragment
 						 container,
 						false);
 
-		prepareWeek26(view);
-		prepareWeek27(view);
-
+        for (int i = 0; i < weeknumbers.length; i++)
+        {
+            int weekToProcess = weeknumbers[i];
+            View weekView = prepareWeek(view, weekToProcess);
+            animateShow(weekView);
+        }
 
 		return view;
 	}
 
-	private void prepareWeek26(View view)
+
+    /**
+     *
+     * @param view
+     * @param weekToProcess
+     * @return
+     */
+	private View prepareWeek(View view, int weekToProcess)
 	{
-		View week26 =
-				view.findViewById(R.id.week26_container);
+		View weekView =
+				view.findViewById(getContainerId(weekToProcess));
 
-		final Week week = getWeek(26);
+		final Week week = getWeek(weekToProcess);
 
-		week26.setOnClickListener(
-			 new View.OnClickListener()
-			 {
-				 @Override
-				 public void onClick(View v)
-				 {
-					 Shared.eventBus.notify(new WeekSelectedEvent(week));
-				 }
-			 });
-
-		animateShow(week26);
-		//animateShow(wednesdayWords);
-	}
-
-
-	private void prepareWeek27(View view)
-	{
-		View week27 =
-				view.findViewById(R.id.week27_container);
-
-		final Week week = getWeek(27);
-
-		week27.setOnClickListener(
+		weekView.setOnClickListener(
 				new View.OnClickListener()
 				{
 					@Override
@@ -78,6 +77,7 @@ public class WeekSelectFragment extends Fragment
 						Shared.eventBus.notify(new WeekSelectedEvent(week));
 					}
 				});
+              return weekView;
 	}
 
 	/**
@@ -112,11 +112,45 @@ public class WeekSelectFragment extends Fragment
 		animatorSet.start();
 	}
 
+    /***
+     *
+     * @param weekToProcess
+     * @return
+     */
+    public int  getContainerId(int weekToProcess)
+    {
+         int id  = 0;
+        switch (weekToProcess)
+        {
+            case 26:
+                id =  R.id.week26_container;
+                break;
+            case 27:
+                id =  R.id.week27_container;
+                break;
+            case 28:
+                id =  R.id.week28_container;
+                break;
+            default:
+                break;
+        }
+
+        return id;
+    }
+
+    /**
+     *
+     * @param week
+     */
 	public void setWeek(Week week)
 	{
 		this.week = week;
 	}
 
+    /**
+     *
+     * @return
+     */
 	public Week  getWeek()
 	{
 		return this.week;
