@@ -3,6 +3,7 @@ package com.secerbeg.matches.events;
 import com.secerbeg.matches.events.engine.FlipDownCardsEvent;
 import com.secerbeg.matches.events.engine.GameWonEvent;
 import com.secerbeg.matches.events.engine.HidePairCardsEvent;
+import com.secerbeg.matches.events.engine.TimeExpiredEvent;
 import com.secerbeg.matches.events.ui.BackGameEvent;
 import com.secerbeg.matches.events.ui.DifficultySelectedEvent;
 import com.secerbeg.matches.events.ui.FlipCardEvent;
@@ -44,7 +45,8 @@ public class EventObserverAdapter implements EventObserver
 	}
 
 	@Override
-	public void onEvent(GameWonEvent event) {
+	public void onEvent(GameWonEvent event)
+	{
 		throw new UnsupportedOperationException();
 	}
 
@@ -72,4 +74,7 @@ public class EventObserverAdapter implements EventObserver
 	{
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public void onEvent(TimeExpiredEvent event) { throw new UnsupportedOperationException();}
 }

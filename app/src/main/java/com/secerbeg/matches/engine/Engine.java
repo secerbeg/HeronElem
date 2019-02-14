@@ -19,6 +19,7 @@ import com.secerbeg.matches.events.EventObserverAdapter;
 import com.secerbeg.matches.events.engine.FlipDownCardsEvent;
 import com.secerbeg.matches.events.engine.GameWonEvent;
 import com.secerbeg.matches.events.engine.HidePairCardsEvent;
+import com.secerbeg.matches.events.engine.TimeExpiredEvent;
 import com.secerbeg.matches.events.ui.BackGameEvent;
 import com.secerbeg.matches.events.ui.DifficultySelectedEvent;
 import com.secerbeg.matches.events.ui.FlipCardEvent;
@@ -134,7 +135,6 @@ public class Engine extends EventObserverAdapter
 	@Override
 	public void onEvent(StartEvent event)
 	{
-//		mScreenController.openScreen(Screen.WEEKDAY_SELECT);
 		mScreenController.openScreen(Screen.WEEK_SELECT);
 	}
 
@@ -164,8 +164,6 @@ public class Engine extends EventObserverAdapter
 	{
         mSelectedWeek = event.week;
         mScreenController.openScreen(Screen.WEEKDAY_SELECT);
-
-
 	}
 
 	@Override
@@ -216,10 +214,8 @@ public class Engine extends EventObserverAdapter
 		mPlayingGame.boardConfiguration = new BoardConfiguration(event.difficulty);
 		mPlayingGame.day = mSelectedDay;
 		mToFlip = mPlayingGame.boardConfiguration.numTiles;
-
 		// arrange board
 		arrangeBoard();
-
 		// start the screen
 		mScreenController.openScreen(Screen.GAME);
 	}
@@ -289,31 +285,37 @@ public class Engine extends EventObserverAdapter
 	public void onEvent(FlipCardEvent event)
 	{
 		// Log.i("my_tag", "Flip: " + event.id);
+		int passedSeconds = (int) (Clock.getInstance().getPassedTime() / 1000);
+
+		evaluateTimerAndExit(passedSeconds);
+
 		int id = event.id;
 		if (mFlippedId == -1)
 		{
 			mFlippedId = id;
 			// Log.i("my_tag", "Flip: mFlippedId: " + event.id);
-		} else
+		}
+		else
+		{
+			if (mPlayingGame.boardArrangment.isPair(mFlippedId, id))
 			{
-
-				if (mPlayingGame.boardArrangment.isPair(mFlippedId, id))
-				{
 				// Log.i("my_tag", "Flip: is pair: " + mFlippedId + ", " + id);
 				// send event - hide id1, id2
 				Shared.eventBus.notify(new HidePairCardsEvent(mFlippedId, id), 1000);
 				// play music
-				mHandler.postDelayed(new Runnable() {
+				mHandler.postDelayed(new Runnable()
+				{
 
 					@Override
-					public void run() {
+					public void run()
+					{
 						Music.playCorrent();
 					}
 				}, 1000);
 				mToFlip -= 2;
 				if (mToFlip == 0)
 				{
-					int passedSeconds = (int) (Clock.getInstance().getPassedTime() / 1000);
+
 					Clock.getInstance().pause();
 					int totalTime = mPlayingGame.boardConfiguration.time;
 					GameState gameState = new GameState();
@@ -326,18 +328,19 @@ public class Engine extends EventObserverAdapter
 					if (passedSeconds <= totalTime / 2)
 					{
 						gameState.achievedStars = 3;
-					} else if (passedSeconds <= totalTime - totalTime / 5)
+					}
+					else if (passedSeconds <= totalTime - totalTime / 5)
 					{
 						gameState.achievedStars = 2;
-					} else if (passedSeconds < totalTime)
+					}
+					else if (passedSeconds < totalTime)
 					{
 						gameState.achievedStars = 1;
-					} else
-
-
-						{
-						 gameState.achievedStars = 0;
-						}
+					}
+					else
+					{
+						gameState.achievedStars = 0;
+					}
 
 					// calc score
 					gameState.achievedScore =
@@ -350,13 +353,16 @@ public class Engine extends EventObserverAdapter
 							mPlayingGame.day.id,
 							mPlayingGame.boardConfiguration.difficulty,
 							gameState.achievedStars);
+
 					Memory.saveTime(mPlayingGame.day.id,
 							mPlayingGame.boardConfiguration.difficulty,
 							gameState.passedSeconds);
+
 					Shared.eventBus.notify(new GameWonEvent(gameState), 1200);
 				}
-			} else
-				{
+			}
+			else
+			{
 				// Log.i("my_tag", "Flip: all down");
 				// send event - flip all down
 				Shared.eventBus.notify(new FlipDownCardsEvent(), 1000);
@@ -365,6 +371,26 @@ public class Engine extends EventObserverAdapter
 			// Log.i("my_tag", "Flip: mFlippedId: " + mFlippedId);
 		}
 	}
+
+
+	private void evaluateTimerAndExit(int passedSeconds)
+	{
+		if (passedSeconds >= mPlayingGame.boardConfiguration.time)
+		{
+			GameState gameState = new GameState();
+			mPlayingGame.gameState = gameState;
+			// remained seconds
+			gameState.remainedSeconds = 0;
+
+			Memory.saveTime(mPlayingGame.day.id,
+					mPlayingGame.boardConfiguration.difficulty,
+					gameState.passedSeconds);
+
+			Shared.eventBus.notify(new TimeExpiredEvent(gameState), 1200);
+		}
+	}
+
+
 
 	public Game getActiveGame()
 	{

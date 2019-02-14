@@ -7,7 +7,8 @@ import android.os.Message;
 import android.os.SystemClock;
 
 @SuppressLint("HandlerLeak")
-public abstract class CountDownClock {
+public abstract class CountDownClock
+{
 
 	/**
 	 * Millis since boot when alarm should stop.
@@ -61,21 +62,27 @@ public abstract class CountDownClock {
 	/**
 	 * Cancel the countdown and clears all remaining messages
 	 */
-	public final void cancel() {
+	public final void cancel()
+	{
 		mHandler.removeCallbacksAndMessages(null);
 	}
 
 	/**
 	 * Create the timer object.
 	 */
-	public synchronized final CountDownClock create() {
-		if (mMillisInFuture <= 0) {
+	public synchronized final CountDownClock create()
+	{
+		if (mMillisInFuture <= 0)
+		{
 			onFinish();
-		} else {
+		}
+		else
+		{
 			mPauseTimeRemaining = mMillisInFuture;
 		}
 
-		if (mRunAtStart) {
+		if (mRunAtStart)
+		{
 			resume();
 		}
 
@@ -85,8 +92,10 @@ public abstract class CountDownClock {
 	/**
 	 * Pauses the counter.
 	 */
-	public void pause() {
-		if (isRunning()) {
+	public void pause()
+	{
+		if (isRunning())
+		{
 			mPauseTimeRemaining = timeLeft();
 			cancel();
 		}
@@ -95,8 +104,10 @@ public abstract class CountDownClock {
 	/**
 	 * Resumes the counter.
 	 */
-	public void resume() {
-		if (isPaused()) {
+	public void resume()
+	{
+		if (isPaused())
+		{
 			mMillisInFuture = mPauseTimeRemaining;
 			mStopTimeInFuture = SystemClock.elapsedRealtime() + mMillisInFuture;
 			mHandler.sendMessage(mHandler.obtainMessage(MSG));
@@ -109,7 +120,8 @@ public abstract class CountDownClock {
 	 * 
 	 * @return true if the timer is currently paused, false otherwise.
 	 */
-	public boolean isPaused() {
+	public boolean isPaused()
+	{
 		return (mPauseTimeRemaining > 0);
 	}
 
@@ -119,7 +131,8 @@ public abstract class CountDownClock {
 	 * 
 	 * @return true if the timer is currently running, false otherwise.
 	 */
-	public boolean isRunning() {
+	public boolean isRunning()
+	{
 		return (!isPaused());
 	}
 
@@ -128,14 +141,20 @@ public abstract class CountDownClock {
 	 * 
 	 * @return number of milliseconds remaining until the timer is finished
 	 */
-	public long timeLeft() {
+	public long timeLeft()
+	{
 		long millisUntilFinished;
-		if (isPaused()) {
+		if (isPaused())
+		{
 			millisUntilFinished = mPauseTimeRemaining;
-		} else {
+		}
+		else
+		{
 			millisUntilFinished = mStopTimeInFuture - SystemClock.elapsedRealtime();
 			if (millisUntilFinished < 0)
+			{
 				millisUntilFinished = 0;
+			}
 		}
 		return millisUntilFinished;
 	}
@@ -145,7 +164,8 @@ public abstract class CountDownClock {
 	 * 
 	 * @return number of milliseconds timer was set to run
 	 */
-	public long totalCountdown() {
+	public long totalCountdown()
+	{
 		return mTotalCountdown;
 	}
 
@@ -154,7 +174,8 @@ public abstract class CountDownClock {
 	 * 
 	 * @return the number of milliseconds that have elapsed on the timer.
 	 */
-	public long timePassed() {
+	public long timePassed()
+	{
 		return mTotalCountdown - timeLeft();
 	}
 
@@ -183,21 +204,27 @@ public abstract class CountDownClock {
 	private static final int MSG = 1;
 
 	// handles counting down
-	private final Handler mHandler = new Handler(Looper.getMainLooper()) {
-
+	private final Handler mHandler = new Handler(Looper.getMainLooper())
+	{
 		@Override
-		public void handleMessage(Message msg) {
+		public void handleMessage(Message msg)
+		{
 
-			synchronized (CountDownClock.this) {
+			synchronized (CountDownClock.this)
+			{
 				long millisLeft = timeLeft();
 
-				if (millisLeft <= 0) {
+				if (millisLeft <= 0)
+				{
 					cancel();
 					onFinish();
-				} else if (millisLeft < mCountdownInterval) {
+				} else if (millisLeft < mCountdownInterval)
+				{
 					// no tick, just delay until done
 					sendMessageDelayed(obtainMessage(MSG), millisLeft);
-				} else {
+				}
+				else
+				{
 					long lastTickStart = SystemClock.elapsedRealtime();
 					onTick(millisLeft);
 
@@ -208,7 +235,9 @@ public abstract class CountDownClock {
 					// mCountdownInterval to
 					// complete, skip to next interval
 					while (delay < 0)
+					{
 						delay += mCountdownInterval;
+					}
 
 					sendMessageDelayed(obtainMessage(MSG), delay);
 				}

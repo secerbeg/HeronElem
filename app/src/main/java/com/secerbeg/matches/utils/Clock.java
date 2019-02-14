@@ -34,43 +34,53 @@ import android.util.Log;
  * 
  * <pre>
  * 
- * @author sromku
+ * @author Mirza Secerbegovic
  * 
  */
-public class Clock {
+public class Clock
+{
 	private static PauseTimer mPauseTimer = null;
 	private static Clock mInstance = null;
 
-	private Clock() {
+	private Clock()
+	{
 		Log.i("my_tag", "NEW INSTANCE OF CLOCK");
 	}
 
-	public static class PauseTimer extends CountDownClock {
+	public static class PauseTimer extends CountDownClock
+	{
 		private OnTimerCount mOnTimerCount = null;
 
-		public PauseTimer(long millisOnTimer, long countDownInterval, boolean runAtStart, OnTimerCount onTimerCount) {
+		public PauseTimer(long millisOnTimer, long countDownInterval, boolean runAtStart, OnTimerCount onTimerCount)
+		{
 			super(millisOnTimer, countDownInterval, runAtStart);
 			mOnTimerCount = onTimerCount;
 		}
 
 		@Override
-		public void onTick(long millisUntilFinished) {
-			if (mOnTimerCount != null) {
+		public void onTick(long millisUntilFinished)
+		{
+			if (mOnTimerCount != null)
+			{
 				mOnTimerCount.onTick(millisUntilFinished);
 			}
 		}
 
 		@Override
-		public void onFinish() {
-			if (mOnTimerCount != null) {
+		public void onFinish()
+		{
+			if (mOnTimerCount != null)
+			{
 				mOnTimerCount.onFinish();
 			}
 		}
 
 	}
 
-	public static Clock getInstance() {
-		if (mInstance == null) {
+	public static Clock getInstance()
+	{
+		if (mInstance == null)
+		{
 			mInstance = new Clock();
 		}
 		return mInstance;
@@ -82,8 +92,10 @@ public class Clock {
 	 * @param millisOnTimer
 	 * @param countDownInterval
 	 */
-	public void startTimer(long millisOnTimer, long countDownInterval, OnTimerCount onTimerCount) {
-		if (mPauseTimer != null) {
+	public void startTimer(long millisOnTimer, long countDownInterval, OnTimerCount onTimerCount)
+	{
+		if (mPauseTimer != null)
+		{
 			mPauseTimer.cancel();
 		}
 		mPauseTimer = new PauseTimer(millisOnTimer, countDownInterval, true, onTimerCount);
@@ -93,8 +105,10 @@ public class Clock {
 	/**
 	 * Pause
 	 */
-	public void pause() {
-		if (mPauseTimer != null) {
+	public void pause()
+	{
+		if (mPauseTimer != null)
+		{
 			mPauseTimer.pause();
 		}
 	}
@@ -102,8 +116,10 @@ public class Clock {
 	/**
 	 * Resume
 	 */
-	public void resume() {
-		if (mPauseTimer != null) {
+	public void resume()
+	{
+		if (mPauseTimer != null)
+		{
 			mPauseTimer.resume();
 		}
 	}
@@ -111,18 +127,22 @@ public class Clock {
 	/**
 	 * Stop and cancel the timer
 	 */
-	public void cancel() {
-		if (mPauseTimer != null) {
+	public void cancel()
+	{
+		if (mPauseTimer != null)
+		{
 			mPauseTimer.mOnTimerCount = null;
 			mPauseTimer.cancel();
 		}
 	}
 
-	public long getPassedTime() {
+	public long getPassedTime()
+	{
 		return mPauseTimer.timePassed();
 	}
 
-	public interface OnTimerCount {
+	public interface OnTimerCount
+	{
 		public void onTick(long millisUntilFinished);
 
 		public void onFinish();

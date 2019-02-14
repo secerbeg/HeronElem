@@ -6,6 +6,7 @@ import com.secerbeg.matches.events.EventObserver;
 import com.secerbeg.matches.events.engine.FlipDownCardsEvent;
 import com.secerbeg.matches.events.engine.GameWonEvent;
 import com.secerbeg.matches.events.engine.HidePairCardsEvent;
+import com.secerbeg.matches.events.engine.TimeExpiredEvent;
 import com.secerbeg.matches.events.ui.BackGameEvent;
 import com.secerbeg.matches.events.ui.DifficultySelectedEvent;
 import com.secerbeg.matches.events.ui.FlipCardEvent;
@@ -14,6 +15,8 @@ import com.secerbeg.matches.events.ui.ResetBackgroundEvent;
 import com.secerbeg.matches.events.ui.StartEvent;
 import com.secerbeg.matches.events.ui.WeekSelectedEvent;
 import com.secerbeg.matches.events.ui.WeekdaySelectedEvent;
+
+import java.sql.Time;
 
 public class BaseFragment extends Fragment implements EventObserver
 {
@@ -49,11 +52,7 @@ public class BaseFragment extends Fragment implements EventObserver
 	}
 
 	@Override
-	public void onEvent(GameWonEvent event)
-
-	{
-		throw new UnsupportedOperationException();
-	}
+	public void onEvent(GameWonEvent event) { throw new UnsupportedOperationException(); }
 	@Override
 	public void onEvent(BackGameEvent event)
 
@@ -82,6 +81,12 @@ public class BaseFragment extends Fragment implements EventObserver
 
 	@Override
 	public void onEvent(WeekSelectedEvent event)
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void onEvent(TimeExpiredEvent event)
 	{
 		throw new UnsupportedOperationException();
 	}

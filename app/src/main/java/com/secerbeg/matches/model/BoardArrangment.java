@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Before game starts, engine build new board
  * 
- * @author sromku
+ * @author Mirza Secerbegovic
  */
 public class BoardArrangment
 {
@@ -62,5 +62,4 @@ public class BoardArrangment
 		}
 		return integer.equals(id2);
 	}
-
 }

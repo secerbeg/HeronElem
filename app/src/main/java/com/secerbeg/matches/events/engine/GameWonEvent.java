@@ -9,24 +9,27 @@ import com.secerbeg.matches.model.GameState;
  *
  * @author Mirza Secerbegovic
  */
-public class GameWonEvent extends AbstractEvent {
-
+public class GameWonEvent extends AbstractEvent
+{
 	public static final String TYPE = GameWonEvent.class.getName();
 
 	public GameState gameState;
 
 	
-	public GameWonEvent(GameState gameState) {
+	public GameWonEvent(GameState gameState)
+	{
 		this.gameState = gameState;
 	}
 
 	@Override
-	protected void fire(EventObserver eventObserver) {
+	protected void fire(EventObserver eventObserver)
+	{
 		eventObserver.onEvent(this);
 	}
 
 	@Override
-	public String getType() {
+	public String getType()
+	{
 		return TYPE;
 	}
 

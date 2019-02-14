@@ -3,6 +3,7 @@ package com.secerbeg.matches.events;
 import com.secerbeg.matches.events.engine.FlipDownCardsEvent;
 import com.secerbeg.matches.events.engine.GameWonEvent;
 import com.secerbeg.matches.events.engine.HidePairCardsEvent;
+import com.secerbeg.matches.events.engine.TimeExpiredEvent;
 import com.secerbeg.matches.events.ui.BackGameEvent;
 import com.secerbeg.matches.events.ui.DifficultySelectedEvent;
 import com.secerbeg.matches.events.ui.FlipCardEvent;
@@ -39,6 +40,8 @@ public interface EventObserver
 	void onEvent(ResetBackgroundEvent event);
 
 	void onEvent(WeekSelectedEvent event);
+
+	void onEvent(TimeExpiredEvent event);
 
 
 }

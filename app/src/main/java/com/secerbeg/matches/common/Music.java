@@ -19,9 +19,11 @@ public class Music
 		if (!OFF)
 		{
 			MediaPlayer mp = MediaPlayer.create(Shared.context, R.raw.correct_answer);
-			mp.setOnCompletionListener(new OnCompletionListener() {
+			mp.setOnCompletionListener(new OnCompletionListener()
+			{
 				@Override
-				public void onCompletion(MediaPlayer mp) {
+				public void onCompletion(MediaPlayer mp)
+				{
 					mp.reset();
 					mp.release();
 					mp = null;

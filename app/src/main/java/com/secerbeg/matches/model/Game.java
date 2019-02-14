@@ -5,7 +5,7 @@ import com.secerbeg.matches.day.Day;
 /**
  * This is instance of active playing game
  * 
- * @author sromku
+ * @author Mirza Secerbegovic
  */
 public class Game
 {
